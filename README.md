@@ -495,12 +495,13 @@ python firmware/test/stall_proxy.py 5010 5005 2     # then point test_link at po
 
 | Member |
 |---|
-| Divyanshi |
-| Rajani Kant Jha |
-| Avani Sehgal |
-| Mohisha |
 | Agam Dayal |
+| Avani Sehgal |
+| Mohisha Mongia |
 | Aryaman Sharma |
+| Rajani Kant Jha |
+| Divyanshi Sharma |
+
 
 ---
 
