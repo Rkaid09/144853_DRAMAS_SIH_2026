@@ -1,0 +1,114 @@
+{
+  "logs": [
+    "device-monitor-260923-234711.log"
+  ],
+  "boots": 0,
+  "wake_events": 3,
+  "latency_ms": {
+    "note": "server ACK = round trip measured on the device, 10 ms resolution",
+    "server_ack_n": 3,
+    "server_ack_median": 19,
+    "server_ack_p90": 52,
+    "server_ack_min": 19,
+    "server_ack_max": 52,
+    "link_ready_warm_median": 1,
+    "link_ready_cold_median": null
+  },
+  "capture": {
+    "events_checked": 3,
+    "clean": 3,
+    "with_dropped_audio": 0,
+    "dropped_ms_total": 0,
+    "endpointed_on_silence": 3,
+    "hit_ceiling": 0,
+    "truncated": 0,
+    "live_ms_median": 1020
+  },
+  "ram": {
+    "peak_kb": 188.5,
+    "peak_pct_of_256kb": 73.6,
+    "under_200kb_claim": true
+  },
+  "cpu": {
+    "front_ms_median": 0.49,
+    "infer_ms_median": 27.7,
+    "idle_after_reset_pct": null,
+    "idle_gate_pct": null,
+    "idle_samples": 0,
+    "link_service_us_median": 11
+  },
+  "warm_link": {
+    "connects": 1,
+    "connect_ms_median": 25,
+    "drops": 0,
+    "drop_reasons": []
+  },
+  "vad_trace_lines": 47,
+  "quiet_tests": [
+    {
+      "seconds": 125,
+      "gate_opens": 0,
+      "scan_duty_pct": 12.6,
+      "cpu_pct": 7.8
+    },
+    {
+      "seconds": 91,
+      "gate_opens": 0,
+      "scan_duty_pct": 12.6,
+      "cpu_pct": 7.9
+    }
+  ],
+  "events": [
+    {
+      "n": 1,
+      "score": 0.902,
+      "rms": 131,
+      "log": "device-monitor-260923-234711.log",
+      "warm": true,
+      "live_ms": 11580,
+      "blocks": 435,
+      "status": "OK (endpointed on silence)",
+      "ready_ms": 1,
+      "hdr_ms": 2,
+      "ack_ms": 52,
+      "end_ms": 11559,
+      "backlog_blocks": 49,
+      "held_ms": 0,
+      "clean": true
+    },
+    {
+      "n": 2,
+      "score": 0.797,
+      "rms": 23,
+      "log": "device-monitor-260923-234711.log",
+      "warm": true,
+      "live_ms": 1020,
+      "blocks": 83,
+      "status": "OK (endpointed on silence)",
+      "ready_ms": 1,
+      "hdr_ms": 2,
+      "ack_ms": 19,
+      "end_ms": 998,
+      "backlog_blocks": 49,
+      "held_ms": 0,
+      "clean": true
+    },
+    {
+      "n": 3,
+      "score": 0.902,
+      "rms": 67,
+      "log": "device-monitor-260923-234711.log",
+      "warm": true,
+      "live_ms": 1020,
+      "blocks": 83,
+      "status": "OK (endpointed on silence)",
+      "ready_ms": 0,
+      "hdr_ms": 2,
+      "ack_ms": 19,
+      "end_ms": 998,
+      "backlog_blocks": 49,
+      "held_ms": 0,
+      "clean": true
+    }
+  ]
+}

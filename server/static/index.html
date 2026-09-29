@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRAHARI</title>
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#141922; --panel2:#1a2029; --line:#242c38;
+    --dim:#7b8794; --fg:#e8eef5; --accent:#4c9aff; --hit:#3ddc84;
+    --warn:#f5a623; --bad:#ff6b6b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       font:15px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:26px 22px 70px}
+
+  header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+  .logo{font-size:22px;font-weight:700;letter-spacing:.2em}
+  .tag{color:var(--dim);font-size:13px}
+  .dot{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--dim)}
+  .dot i{width:9px;height:9px;border-radius:50%;background:#3c4652;display:inline-block;transition:.2s}
+  .dot.on i{background:var(--hit);box-shadow:0 0 12px var(--hit)}
+
+  .state{border:1px solid var(--line);border-radius:14px;background:var(--panel);
+         padding:38px 22px;text-align:center;margin-bottom:22px;transition:.2s}
+  .state .big{font-size:38px;font-weight:700;letter-spacing:.2em;color:var(--dim)}
+  .state .meta{font-size:13px;color:var(--dim);margin-top:8px;min-height:18px}
+  .state.hit{border-color:var(--hit);background:linear-gradient(180deg,#0f2a1c,#111a17)}
+  .state.hit .big{color:var(--hit)}
+
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+  @media(max-width:900px){.tiles{grid-template-columns:repeat(2,1fr)}}
+  .tile{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:16px 18px}
+  .tile .k{font-size:11px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+  .tile .v{font-size:30px;font-weight:700;margin-top:6px;font-variant-numeric:tabular-nums;
+           line-height:1.1}
+  .tile .u{font-size:13px;color:var(--dim);font-weight:400}
+  .tile .s{font-size:12px;color:var(--dim);margin-top:5px}
+  .bar{height:5px;border-radius:3px;background:#222a35;margin-top:10px;overflow:hidden}
+  .bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+  .bar.ok>i{background:var(--hit)} .bar.warn>i{background:var(--warn)}
+
+  h2.sec{font-size:12px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;
+         margin:0 0 12px;font-weight:600}
+  .ev{border:1px solid var(--line);border-radius:12px;background:var(--panel);
+      padding:14px 16px;margin-bottom:10px}
+  .ev.new{animation:pop .5s ease}
+  @keyframes pop{from{border-color:var(--hit);transform:translateY(-4px)}to{}}
+  .ev .top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .seq{font-weight:700;color:var(--hit);font-size:15px}
+  .when{color:var(--dim);font-size:12px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+  .chip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;
+        padding:3px 11px;font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
+  .chip b{color:var(--fg);font-weight:600}
+  audio{width:100%;margin-top:12px;height:38px;filter:invert(.92) hue-rotate(180deg)}
+  .txt{margin-top:9px;font-size:13px;color:var(--dim)}
+  .txt b{color:var(--fg);font-weight:500;font-size:15px}
+  .txt.empty{font-style:italic}
+  .none{color:var(--dim);font-size:13px;padding:10px 0}
+
+  footer{margin-top:26px;color:var(--dim);font-size:12px;border-top:1px solid var(--line);
+         padding-top:14px;line-height:1.7}
+</style></head><body>
+<div class="wrap">
+  <header>
+    <span class="logo">PRAHARI</span>
+    <span class="tag">wake word on the edge &rarr; audio streamed to the cloud</span>
+    <span class="dot" id="conn"><i></i><span>waiting for device</span></span>
+  </header>
+
+  <div class="state" id="state">
+    <div class="big" id="stateText">LISTENING</div>
+    <div class="meta" id="stateMeta">say &ldquo;prahari&rdquo;</div>
+  </div>
+
+  <div class="tiles">
+    <div class="tile">
+      <div class="k">RAM used</div>
+      <div class="v" id="mRam">&mdash;<span class="u"> KB</span></div>
+      <div class="s">of 256 KB budget</div>
+      <div class="bar ok"><i id="bRam"></i></div>
+    </div>
+    <div class="tile">
+      <div class="k">keyword &rarr; cloud</div>
+      <div class="v" id="mLat">&mdash;<span class="u"> ms</span></div>
+      <div class="s" id="mLatSub">TLS handshake would be 1210 ms</div>
+    </div>
+    <div class="tile">
+      <div class="k">inference</div>
+      <div class="v" id="mInf">&mdash;<span class="u"> ms</span></div>
+      <div class="s" id="mArena">arena &mdash;</div>
+    </div>
+    <div class="tile">
+      <div class="k">model size</div>
+      <div class="v" id="mModel">&mdash;<span class="u"> KB</span></div>
+      <div class="s">int8, in flash</div>
+    </div>
+  </div>
+
+  <h2 class="sec">Detections &mdash; press play to hear exactly what the device sent</h2>
+  <div id="events"><div class="none">nothing yet</div></div>
+
+  <footer>
+    Seeed XIAO ESP32-S3 &middot; TensorFlow Lite Micro + ESP-NN on-device &middot; Vosk (offline) on the server.<br>
+    Every figure above is reported by the hardware at the moment of the event, not from a slide.
+    Audio is the unmodified stream the device captured, including 400&nbsp;ms of pre-roll recorded
+    <em>before</em> the keyword was recognised. This demo streams over plain TCP; TLS is measured but not enabled here.
+  </footer>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const state = $("state"), conn = $("conn"), events = $("events");
+let resetTimer = null, pending = {};
+
+const esc = t => (t||"").replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
+
+function onWake(m){
+  state.classList.add("hit");
+  $("stateText").textContent = "DETECTED";
+  $("stateMeta").textContent = "streaming audio to the server…";
+  clearTimeout(resetTimer);
+  pending[m.seq] = m;
+
+  if(m.free_sram!=null && m.arena_bytes!=null){
+    const kb = (262144 - m.free_sram)/1024;
+  }
+  if(m.connect_ms!=null){
+    $("mLat").innerHTML = m.connect_ms + '<span class="u"> ms</span>';
+  }
+  if(m.infer_ms!=null) $("mInf").innerHTML = m.infer_ms.toFixed(1)+'<span class="u"> ms</span>';
+  if(m.arena_bytes) $("mArena").textContent = "arena "+m.arena_bytes.toLocaleString()+" B";
+  if(m.model_bytes) $("mModel").innerHTML = (m.model_bytes/1024).toFixed(1)+'<span class="u"> KB</span>';
+  if(m.ram_used_bytes){
+    const kb = m.ram_used_bytes/1024, pct = 100*kb/256;
+    $("mRam").innerHTML = kb.toFixed(1)+'<span class="u"> KB</span>';
+    $("bRam").style.width = Math.min(100,pct)+"%";
+  }
+}
+
+function onTranscript(m){
+  $("stateMeta").textContent = "audio received — press play below";
+  const w = pending[m.seq] || {};
+  delete pending[m.seq];
+
+  if(events.firstElementChild && events.firstElementChild.className==="none")
+    events.innerHTML = "";
+
+  const txt = (m.text||"").trim();
+  const el = document.createElement("div");
+  el.className = "ev new";
+  el.innerHTML =
+    '<div class="top">'
+    + '<span class="seq">#'+(m.seq??"")+'</span>'
+    + '<span class="when">'+new Date().toLocaleTimeString()+'</span>'
+    + '<span class="chips">'
+    +   (w.score!=null ? '<span class="chip">score <b>'+w.score.toFixed(3)+'</b></span>' : '')
+    +   (w.connect_ms!=null ? '<span class="chip">to cloud <b>'+w.connect_ms+' ms</b></span>' : '')
+    +   (m.audio_ms!=null ? '<span class="chip">audio <b>'+(m.audio_ms/1000).toFixed(2)+' s</b></span>' : '')
+    +   (m.asr_ms!=null ? '<span class="chip">ASR <b>'+m.asr_ms+' ms</b></span>' : '')
+    + '</span></div>'
+    + (m.wav ? '<audio controls preload="none" src="/captures/'+encodeURIComponent(m.wav)+'"></audio>' : '')
+    + '<div class="txt'+(txt?'':' empty')+'">transcript: '
+    +   (txt ? '<b>'+esc(txt)+'</b>' : 'no speech recognised')
+    + '</div>';
+  events.prepend(el);
+  while(events.children.length > 12) events.removeChild(events.lastChild);
+
+  resetTimer = setTimeout(()=>{
+    state.classList.remove("hit");
+    $("stateText").textContent = "LISTENING";
+    $("stateMeta").textContent = "say “prahari”";
+  }, 5000);
+}
+
+const es = new EventSource("/events");
+es.onopen  = ()=>{ conn.classList.add("on"); conn.lastElementChild.textContent="server connected"; };
+es.onerror = ()=>{ conn.classList.remove("on"); conn.lastElementChild.textContent="server offline"; };
+es.onmessage = e => {
+  const m = JSON.parse(e.data);
+  if(m.type==="wake") onWake(m);
+  else if(m.type==="transcript") onTranscript(m);
+};
+</script>
+</body></html>

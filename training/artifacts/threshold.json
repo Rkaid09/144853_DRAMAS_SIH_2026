@@ -1,0 +1,5 @@
+{
+ "threshold": 0.85,
+ "fa_per_hour_select": 0.4774,
+ "epoch": 7
+}

@@ -1,0 +1,7 @@
+tensorflow>=2.15
+numpy
+scipy
+soundfile
+pyarrow
+flatbuffers
+matplotlib

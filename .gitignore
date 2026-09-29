@@ -1,0 +1,59 @@
+# build output
+.pio/
+sdkconfig.xiao_esp32s3
+sdkconfig.*.old
+build/
+firmware/test/test_logmel
+firmware/test/test_link
+*.o
+*.elf
+*.bin
+
+# vendor components (fetched by tools/setup_components.sh)
+components/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*_env/
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ASR model (download from alphacephei.com/vosk/models)
+server/vosk-model*/
+
+# runtime output
+server/captures/*
+!server/captures/.gitkeep
+logs/*.log.tmp
+
+# datasets and generated features (regenerate with tools/ and training/)
+tools/dataset_*/
+tools/downloads/
+tools/speech_commands*/
+tools/ESC-50-master/
+tools/cv-corpus-*/
+tools/*.tar.gz
+tools/*.zip
+training/data/
+training/artifacts/retrain*/
+training/artifacts/best.keras
+
+# human recordings stay private (evaluation only)
+recordings/
+tools/prahari_*/
+prahari_*/
+training/human_review.csv
+training/human_split.json
+
+# API keys
+tools/elevenlabs_keys.txt
+tools/sarvam_key.txt
+*.key
+.env

@@ -1,0 +1,967 @@
+free SRAM    : 264632 B
+---------------------------------------------------------------
+SELF-TEST (embedded clips - must match the laptop)
+POSITIVE  raw  127 (expect  127)  score 0.996094 (expect 0.996094)  MATCH
+          front-end  44.87 ms (0.458 ms/frame)   inference  28.07 ms
+NEGATIVE  raw -126 (expect -127)  score 0.007812 (expect 0.003906)  MATCH (1 LSB - device kernel rounding)
+          front-end  44.69 ms (0.456 ms/frame)   inference  27.76 ms
+self-test    : PASS
+---------------------------------------------------------------
+WiFi: connecting to "Redmi" [0;32mI (2951) pp: pp rom version: e7ae62f[0m
+[0;32mI (2952) net80211: net80211 rom version: e7ae62f[0m
+I (2953) wifi:wifi driver task: 3fcf7888, prio:23, stack:6656, core=0
+[0;32mI (6348) system_api: Base MAC address is not set[0m
+[0;32mI (6353) system_api: read default base MAC address from EFUSE[0m
+I (6377) wifi:wifi firmware version: 1fd20f4
+I (6377) wifi:wifi certification version: v7.0
+I (6377) wifi:config NVS flash: enabled
+I (6378) wifi:config nano formating: disabled
+I (6382) wifi:Init data frame dynamic rx buffer num: 32
+I (6387) wifi:Init static rx mgmt buffer num: 5
+I (6391) wifi:Init management short buffer num: 32
+I (6395) wifi:Init dynamic tx buffer num: 32
+I (6399) wifi:Init static tx FG buffer num: 2
+I (6404) wifi:Init static rx buffer size: 1600
+I (6408) wifi:Init static rx buffer num: 4
+I (6411) wifi:Init dynamic rx buffer num: 32
+[0;32mI (6416) wifi_init: tcpip mbox: 32[0m
+[0;32mI (6419) wifi_init: udp mbox: 6[0m
+[0;32mI (6423) wifi_init: tcp mbox: 6[0m
+[0;32mI (6427) wifi_init: tcp tx win: 2880[0m
+[0;32mI (6431) wifi_init: tcp rx win: 2880[0m
+[0;32mI (6436) wifi_init: tcp mss: 1440[0m
+[0;32mI (6440) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (6444) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (6450) phy_init: phy_version 640,cd64a1a,Jan 24 2024,17:28:12[0m
+I (6492) wifi:mode : sta (98:3d:ae:e5:9a:28)
+I (6493) wifi:enable tsf
+I (6494) wifi:Set ps type: 0
+
+I (6494) wifi:Set ps type: 0
+
+I (6505) wifi:new:<7,0>, old:<1,0>, ap:<255,255>, sta:<7,0>, prof:1
+I (6506) wifi:state: init -> auth (b0)
+I (6510) wifi:state: auth -> assoc (0)
+I (6517) wifi:Association refused temporarily, comeback time 1000 (TUs)
+....I (7542) wifi:state: assoc -> assoc (0)
+E (7547) wifi:Set status to INIT
+I (7548) wifi:state: assoc -> init (1e10)
+I (7548) wifi:new:<7,0>, old:<7,0>, ap:<255,255>, sta:<7,0>, prof:1
+I (7557) wifi:new:<7,0>, old:<7,0>, ap:<255,255>, sta:<7,0>, prof:1
+I (7559) wifi:state: init -> auth (b0)
+I (7562) wifi:state: auth -> assoc (0)
+I (7581) wifi:state: assoc -> run (10)
+I (7596) wifi:connected with Redmi, aid = 1, channel 7, BW20, bssid = f6:05:27:86:f7:5d
+I (7597) wifi:security: WPA2-PSK, phy: bgn, rssi: -45
+I (7602) wifi:pm start, type: 0
+
+I (7602) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 0, mt_pti: 25000, mt_time: 10000
+I (7610) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+....[0;32mI (8617) esp_netif_handlers: sta ip: 172.30.75.42, mask: 255.255.255.0, gw: 172.30.75.192[0m
+.
+WiFi: connected, IP 172.30.75.42, 2250 ms
+discovery: asking 172.30.75.255:5006 .
+discovery: server at 172.30.75.183:5005
+  link: UP to 172.30.75.183:5005 in 24 ms - kept open for every wake event
+free SRAM after WiFi: 219240 B (214.1 KB)
+---------------------------------------------------------------
+[0;32mI (8799) gpio: GPIO[21]| InputEn: 1| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (8801) I2S: DMA Malloc info, datalen=blocksize=512, dma_buf_count=12[0m
+MICROPHONE LIVE
+  PDM clock GPIO42, data GPIO41, 16000 Hz mono
+  inference every 12 hops (120 ms), threshold 0.70, smoothing 2, refractory 1500 ms
+  reference loudness (positive clip) RMS 2099
+  compare that with the live RMS below - if they are
+  far apart, set MIC_GAIN and reflash.
+---------------------------------------------------------------
+microphone check - one second of audio...
+  raw RMS 1596.8   min -1459   max 2103   exact-zero samples 1/16000
+  microphone looks alive.
+  for scale, the positive training clip has RMS 2099
+---------------------------------------------------------------
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        121012 B   118.2 KB   [total 331532 - min-free 210520]
+  TOTAL INTERNAL SRAM        184492 B   180.2 KB   = 70.4% of 256 KB
+  headroom left               77652 B    75.8 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+Say "prahari".
+[live] score 0.012 (best 0.016) trig@0.70 | gate 12.5% floor   49 slow | LOUDEST  1433/2099 [ok] gain 1.5 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 0 | link UP 18us | opens 0
+[live] score 0.008 (best 0.012) trig@0.70 | gate 12.5% floor   50 slow | LOUDEST   373/2099 [TOO QUIET] gain 5.6 | front 0.80 infer 27.8 | CPU 11% = 8 front + 3 net | hits 0 | link UP 21us | opens 0
+[live] score 0.008 (best 0.008) trig@0.70 | gate 12.5% floor   50 slow | LOUDEST   441/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 0 | link UP 10us | opens 0
+[live] score 0.008 (best 0.012) trig@0.70 | gate 12.5% floor   50 slow | LOUDEST   629/2099 [TOO QUIET] gain 3.3 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 0 | link UP 10us | opens 0
+[live] score 0.008 (best 0.012) trig@0.70 | gate 12.5% floor   50 slow | LOUDEST   308/2099 [TOO QUIET] gain 6.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 0 | link UP 10us | opens 0
+[live] score 0.012 (best 0.016) trig@0.70 | gate 12.5% floor   55 slow | LOUDEST   444/2099 [TOO QUIET] gain 4.7 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 0 | link UP 11us | opens 0
+
+  *** PRAHARI ***  #1   score 0.738 (peak-of-2 0.738)   RMS 712   t=74086 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 7980 ms live | 315 blocks sent | stream #1 OK (hit the ceiling - VAD never saw 800 ms of quiet)
+  endpoint: peak block rms 566, quiet below 226, floor 161
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 20 ms (round trip) | END sent 7958 ms
+  capture: 7980 ms audio in 7951 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.051 (best 0.738) trig@0.70 | gate 12.5% floor  285 slow | LOUDEST  3793/2099 [ok] gain 0.6 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 1 | link UP 10us | opens 0
+
+  *** PRAHARI ***  #2   score 0.895 (peak-of-2 0.895)   RMS 1084   t=92983 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 3210 ms live | 156 blocks sent | stream #2 OK (endpointed on silence)
+  endpoint: peak block rms 1282, quiet below 466, floor 333
+  latency: keyword -> link ready 2 ms (already open) | header in TCP 3 ms | server ACK 35 ms (round trip) | END sent 3189 ms
+  capture: 3210 ms audio in 3183 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.047 (best 0.895) trig@0.70 | gate 12.9% floor  288 slow | LOUDEST  1388/2099 [ok] gain 1.5 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 2 | link UP 10us | opens 1
+
+  *** PRAHARI ***  #3   score 0.777 (peak-of-2 0.777)   RMS 731   t=102438 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 2760 ms live | 141 blocks sent | stream #3 OK (endpointed on silence)
+  endpoint: peak block rms 1304, quiet below 480, floor 343
+  latency: keyword -> link ready 2 ms (already open) | header in TCP 3 ms | server ACK 20 ms (round trip) | END sent 2726 ms
+  capture: 2760 ms audio in 2720 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+
+  *** PRAHARI ***  #4   score 0.836 (peak-of-2 0.836)   RMS 804   t=109271 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 7980 ms live | 315 blocks sent | stream #4 OK (hit the ceiling - VAD never saw 800 ms of quiet)
+  endpoint: peak block rms 1159, quiet below 481, floor 343
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 35 ms (round trip) | END sent 7957 ms
+  capture: 7980 ms audio in 7951 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.109 (best 0.836) trig@0.70 | gate 13.5% floor  286 slow | LOUDEST  1186/2099 [ok] gain 1.8 | front 0.59 infer 27.6 | CPU 9% = 6 front + 3 net | hits 4 | link UP 10us | opens 3
+[live] score 0.008 (best 0.074) trig@0.70 | gate 13.4% floor  126 slow | LOUDEST   865/2099 [ok] gain 2.4 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 4 | link UP 9us | opens 3
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.3% floor   46 slow | LOUDEST   402/2099 [TOO QUIET] gain 5.2 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 4 | link UP 10us | opens 3
+[live] score 0.012 (best 0.012) trig@0.70 | gate 13.3% floor   46 slow | LOUDEST   361/2099 [TOO QUIET] gain 5.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 4 | link UP 11us | opens 3
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.2% floor   47 slow | LOUDEST   229/2099 [TOO QUIET] gain 9.2 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 4 | link UP 9us | opens 3
+[live] score 0.004 (best 0.012) trig@0.70 | gate 13.2% floor   49 slow | LOUDEST   350/2099 [TOO QUIET] gain 6.0 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 4 | link UP 10us | opens 3
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.1% floor   46 slow | LOUDEST   203/2099 [TOO QUIET] gain 10.3 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 4 | link UP 11us | opens 3
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.1% floor   46 slow | LOUDEST   225/2099 [TOO QUIET] gain 9.3 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 4 | link UP 10us | opens 3
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.0% floor   47 slow | LOUDEST   598/2099 [TOO QUIET] gain 3.5 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 4 | link UP 10us | opens 3
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.0% floor   47 slow | LOUDEST   226/2099 [TOO QUIET] gain 9.3 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 4 | link UP 10us | opens 3
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        129376 B   126.3 KB   [total 331532 - min-free 202156]
+  TOTAL INTERNAL SRAM        192856 B   188.3 KB   = 73.6% of 256 KB
+  headroom left               69288 B    67.7 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.027 (best 0.047) trig@0.70 | gate 13.3% floor   56 FAST | LOUDEST   676/2099 [TOO QUIET] gain 3.1 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 4 | link UP 20us | opens 4
+[live] score 0.516 (best 0.516) trig@0.70 | gate 13.6% floor   55 FAST | LOUDEST  1064/2099 [ok] gain 2.0 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 4 | link UP 16us | opens 5
+[live] score 0.008 (best 0.484) trig@0.70 | gate 13.8% floor   50 slow | LOUDEST   703/2099 [TOO QUIET] gain 3.0 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 4 | link UP 16us | opens 5
+[live] score 0.016 (best 0.016) trig@0.70 | gate 13.8% floor   51 slow | LOUDEST   362/2099 [TOO QUIET] gain 5.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 4 | link UP 19us | opens 5
+[live] score 0.008 (best 0.016) trig@0.70 | gate 13.7% floor   49 slow | LOUDEST   438/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 4 | link UP 21us | opens 5
+[live] score 0.008 (best 0.031) trig@0.70 | gate 13.8% floor   53 FAST | LOUDEST   524/2099 [TOO QUIET] gain 4.0 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 4 | link UP 13us | opens 6
+
+  *** PRAHARI ***  #5   score 0.828 (peak-of-2 0.828)   RMS 343   t=254662 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 1020 ms live | 83 blocks sent | stream #5 OK (endpointed on silence)
+  endpoint: peak block rms 114, quiet below 79, floor 57
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 52 ms (round trip) | END sent 982 ms
+  capture: 1020 ms audio in 978 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.008 (best 0.828) trig@0.70 | gate 14.0% floor   55 slow | LOUDEST  1230/2099 [ok] gain 1.7 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 10us | opens 6
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.9% floor   47 slow | LOUDEST   321/2099 [TOO QUIET] gain 6.5 | front 0.50 infer 27.7 | CPU 8% = 5 front + 3 net | hits 5 | link UP 11us | opens 6
+[live] score 0.012 (best 0.012) trig@0.70 | gate 13.9% floor   47 slow | LOUDEST   393/2099 [TOO QUIET] gain 5.3 | front 0.49 infer 27.8 | CPU 8% = 5 front + 3 net | hits 5 | link UP 8us | opens 6
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.8% floor   47 slow | LOUDEST   472/2099 [TOO QUIET] gain 4.4 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 9us | opens 6
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        129376 B   126.3 KB   [total 331532 - min-free 202156]
+  TOTAL INTERNAL SRAM        192856 B   188.3 KB   = 73.6% of 256 KB
+  headroom left               69288 B    67.7 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.8% floor   48 slow | LOUDEST   255/2099 [TOO QUIET] gain 8.2 | front 0.50 infer 27.8 | CPU 8% = 5 front + 3 net | hits 5 | link UP 10us | opens 6
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.7% floor   48 slow | LOUDEST   253/2099 [TOO QUIET] gain 8.3 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 5 | link UP 10us | opens 6
+[live] score 0.012 (best 0.012) trig@0.70 | gate 13.7% floor   49 slow | LOUDEST   257/2099 [TOO QUIET] gain 8.2 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 11us | opens 6
+[live] score 0.004 (best 0.008) trig@0.70 | gate 13.7% floor   48 slow | LOUDEST   384/2099 [TOO QUIET] gain 5.5 | front 0.49 infer 27.8 | CPU 8% = 5 front + 3 net | hits 5 | link UP 11us | opens 6
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.6% floor   49 slow | LOUDEST   267/2099 [TOO QUIET] gain 7.9 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 11us | opens 6
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.6% floor   49 slow | LOUDEST   290/2099 [TOO QUIET] gain 7.2 | front 0.49 infer 27.8 | CPU 8% = 5 front + 3 net | hits 5 | link UP 12us | opens 6
+[live] score 0.020 (best 0.020) trig@0.70 | gate 13.6% floor   47 FAST | LOUDEST   417/2099 [TOO QUIET] gain 5.0 | front 0.50 infer 27.7 | CPU 8% = 5 front + 3 net | hits 5 | link UP 14us | opens 7
+[live] score 0.008 (best 0.055) trig@0.70 | gate 13.8% floor   48 slow | LOUDEST   453/2099 [TOO QUIET] gain 4.6 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 11us | opens 7
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.7% floor   47 slow | LOUDEST   373/2099 [TOO QUIET] gain 5.6 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 5 | link UP 10us | opens 7
+[live] score 0.012 (best 0.012) trig@0.70 | gate 13.7% floor   47 slow | LOUDEST   343/2099 [TOO QUIET] gain 6.1 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 9us | opens 7
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        129376 B   126.3 KB   [total 331532 - min-free 202156]
+  TOTAL INTERNAL SRAM        192856 B   188.3 KB   = 73.6% of 256 KB
+  headroom left               69288 B    67.7 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.7% floor   46 slow | LOUDEST   381/2099 [TOO QUIET] gain 5.5 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 5 | link UP 10us | opens 7
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.6% floor   46 slow | LOUDEST   312/2099 [TOO QUIET] gain 6.7 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 10us | opens 7
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.6% floor   45 slow | LOUDEST   290/2099 [TOO QUIET] gain 7.2 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 5 | link UP 10us | opens 7
+[live] score 0.008 (best 0.055) trig@0.70 | gate 13.8% floor   46 slow | LOUDEST   300/2099 [TOO QUIET] gain 7.0 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 5 | link UP 11us | opens 8
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.7% floor   46 slow | LOUDEST   257/2099 [TOO QUIET] gain 8.2 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 9us | opens 8
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.7% floor   47 slow | LOUDEST   252/2099 [TOO QUIET] gain 8.3 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 10us | opens 8
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.7% floor   46 slow | LOUDEST   331/2099 [TOO QUIET] gain 6.3 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 10us | opens 8
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.6% floor   46 slow | LOUDEST   342/2099 [TOO QUIET] gain 6.1 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 9us | opens 8
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.6% floor   46 slow | LOUDEST   398/2099 [TOO QUIET] gain 5.3 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 5 | link UP 10us | opens 8
+[live] score 0.055 (best 0.074) trig@0.70 | gate 13.8% floor   69 FAST | LOUDEST   372/2099 [TOO QUIET] gain 5.6 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 5 | link UP 17us | opens 9
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        129376 B   126.3 KB   [total 331532 - min-free 202156]
+  TOTAL INTERNAL SRAM        192856 B   188.3 KB   = 73.6% of 256 KB
+  headroom left               69288 B    67.7 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.047 (best 0.203) trig@0.70 | gate 14.1% floor   85 FAST | LOUDEST   553/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 19us | opens 9
+[live] score 0.008 (best 0.043) trig@0.70 | gate 14.1% floor   47 slow | LOUDEST   484/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.8 | CPU 8% = 5 front + 3 net | hits 5 | link UP 9us | opens 9
+[live] score 0.012 (best 0.012) trig@0.70 | gate 14.1% floor   50 FAST | LOUDEST   368/2099 [TOO QUIET] gain 5.7 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 11us | opens 10
+[live] score 0.211 (best 0.211) trig@0.70 | gate 14.3% floor   59 FAST | LOUDEST   445/2099 [TOO QUIET] gain 4.7 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 17us | opens 10
+[live] score 0.008 (best 0.285) trig@0.70 | gate 14.4% floor   46 slow | LOUDEST   363/2099 [TOO QUIET] gain 5.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 11us | opens 10
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.3% floor   46 slow | LOUDEST   256/2099 [TOO QUIET] gain 8.2 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 9us | opens 10
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.3% floor   46 slow | LOUDEST   419/2099 [TOO QUIET] gain 5.0 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 5 | link UP 11us | opens 10
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.2% floor   45 slow | LOUDEST   355/2099 [TOO QUIET] gain 5.9 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 11us | opens 10
+[live] score 0.012 (best 0.012) trig@0.70 | gate 14.2% floor   46 slow | LOUDEST   272/2099 [TOO QUIET] gain 7.7 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 10us | opens 10
+[live] score 0.004 (best 0.008) trig@0.70 | gate 14.2% floor   48 slow | LOUDEST   225/2099 [TOO QUIET] gain 9.3 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 13us | opens 10
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        129376 B   126.3 KB   [total 331532 - min-free 202156]
+  TOTAL INTERNAL SRAM        192856 B   188.3 KB   = 73.6% of 256 KB
+  headroom left               69288 B    67.7 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.008) trig@0.70 | gate 14.1% floor   46 slow | LOUDEST   497/2099 [TOO QUIET] gain 4.2 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 5 | link UP 13us | opens 10
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.1% floor   46 slow | LOUDEST   376/2099 [TOO QUIET] gain 5.6 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 15us | opens 10
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.1% floor   45 slow | LOUDEST   351/2099 [TOO QUIET] gain 6.0 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 20us | opens 10
+[live] score 0.008 (best 0.008) trig@0.70 | gate 14.1% floor   46 slow | LOUDEST   416/2099 [TOO QUIET] gain 5.0 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 22us | opens 10
+[live] score 0.004 (best 0.008) trig@0.70 | gate 14.0% floor   49 slow | LOUDEST   376/2099 [TOO QUIET] gain 5.6 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 5 | link UP 10us | opens 10
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.0% floor   46 slow | LOUDEST   347/2099 [TOO QUIET] gain 6.0 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 9us | opens 10
+[live] score 0.059 (best 0.301) trig@0.70 | gate 14.1% floor   52 FAST | LOUDEST   458/2099 [TOO QUIET] gain 4.6 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 19us | opens 11
+[live] score 0.203 (best 0.449) trig@0.70 | gate 14.3% floor   63 FAST | LOUDEST   599/2099 [TOO QUIET] gain 3.5 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 20us | opens 11
+[live] score 0.031 (best 0.246) trig@0.70 | gate 14.4% floor   51 FAST | LOUDEST   440/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 5 | link UP 11us | opens 12
+
+  *** PRAHARI ***  #6   score 0.727 (peak-of-2 0.727)   RMS 263   t=604518 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 1020 ms live | 83 blocks sent | stream #6 OK (endpointed on silence)
+  endpoint: peak block rms 56, quiet below 83, floor 59
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 20 ms (round trip) | END sent 998 ms
+  capture: 1020 ms audio in 993 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.023 (best 0.727) trig@0.70 | gate 14.6% floor   61 FAST | LOUDEST   625/2099 [TOO QUIET] gain 3.4 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 6 | link UP 13us | opens 13
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        129376 B   126.3 KB   [total 331532 - min-free 202156]
+  TOTAL INTERNAL SRAM        192856 B   188.3 KB   = 73.6% of 256 KB
+  headroom left               69288 B    67.7 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+
+  *** PRAHARI ***  #7   score 0.777 (peak-of-2 0.777)   RMS 351   t=607462 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 1590 ms live | 102 blocks sent | stream #7 OK (endpointed on silence)
+  endpoint: peak block rms 357, quiet below 99, floor 71
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 21 ms (round trip) | END sent 1558 ms
+  capture: 1590 ms audio in 1553 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.008 (best 0.777) trig@0.70 | gate 14.7% floor   53 slow | LOUDEST   509/2099 [TOO QUIET] gain 4.1 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 10us | opens 13
+[live] score 0.004 (best 0.012) trig@0.70 | gate 14.7% floor   50 slow | LOUDEST   297/2099 [TOO QUIET] gain 7.1 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 12us | opens 13
+[live] score 0.012 (best 0.012) trig@0.70 | gate 14.6% floor   46 slow | LOUDEST   412/2099 [TOO QUIET] gain 5.1 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 7 | link UP 12us | opens 13
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.6% floor   46 slow | LOUDEST   246/2099 [TOO QUIET] gain 8.5 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 14us | opens 13
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.6% floor   45 slow | LOUDEST   372/2099 [TOO QUIET] gain 5.6 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 17us | opens 13
+[live] score 0.008 (best 0.008) trig@0.70 | gate 14.5% floor   46 slow | LOUDEST   370/2099 [TOO QUIET] gain 5.7 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 19us | opens 13
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.5% floor   50 slow | LOUDEST   339/2099 [TOO QUIET] gain 6.2 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 7 | link UP 9us | opens 13
+[live] score 0.012 (best 0.012) trig@0.70 | gate 14.5% floor   46 slow | LOUDEST   409/2099 [TOO QUIET] gain 5.1 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 10us | opens 13
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.5% floor   46 slow | LOUDEST   435/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 9us | opens 13
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.4% floor   46 slow | LOUDEST   468/2099 [TOO QUIET] gain 4.5 | front 0.50 infer 27.9 | CPU 8% = 5 front + 3 net | hits 7 | link UP 9us | opens 13
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        130156 B   127.1 KB   [total 331532 - min-free 201376]
+  TOTAL INTERNAL SRAM        193636 B   189.1 KB   = 73.9% of 256 KB
+  headroom left               68508 B    66.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.004 (best 0.012) trig@0.70 | gate 14.4% floor   50 slow | LOUDEST   317/2099 [TOO QUIET] gain 6.6 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 7 | link UP 10us | opens 13
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.4% floor   48 slow | LOUDEST   423/2099 [TOO QUIET] gain 5.0 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 9us | opens 13
+[live] score 0.004 (best 0.008) trig@0.70 | gate 14.3% floor   50 slow | LOUDEST   265/2099 [TOO QUIET] gain 7.9 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 9us | opens 13
+[live] score 0.012 (best 0.012) trig@0.70 | gate 14.3% floor   46 slow | LOUDEST   445/2099 [TOO QUIET] gain 4.7 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 9us | opens 13
+[live] score 0.004 (best 0.012) trig@0.70 | gate 14.3% floor   49 slow | LOUDEST   518/2099 [TOO QUIET] gain 4.1 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 7 | link UP 9us | opens 13
+[live] score 0.004 (best 0.008) trig@0.70 | gate 14.3% floor   46 slow | LOUDEST   458/2099 [TOO QUIET] gain 4.6 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 10us | opens 13
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.3% floor   45 slow | LOUDEST   449/2099 [TOO QUIET] gain 4.7 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 9us | opens 13
+[live] score 0.008 (best 0.008) trig@0.70 | gate 14.2% floor   46 slow | LOUDEST   342/2099 [TOO QUIET] gain 6.1 | front 0.51 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 10us | opens 13
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.2% floor   45 slow | LOUDEST   296/2099 [TOO QUIET] gain 7.1 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 7 | link UP 11us | opens 13
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.2% floor   45 slow | LOUDEST   400/2099 [TOO QUIET] gain 5.2 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 11us | opens 13
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        130156 B   127.1 KB   [total 331532 - min-free 201376]
+  TOTAL INTERNAL SRAM        193636 B   189.1 KB   = 73.9% of 256 KB
+  headroom left               68508 B    66.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.004 (best 0.008) trig@0.70 | gate 14.2% floor   45 slow | LOUDEST   235/2099 [TOO QUIET] gain 8.9 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 10us | opens 13
+[live] score 0.004 (best 0.012) trig@0.70 | gate 14.1% floor   48 slow | LOUDEST   450/2099 [TOO QUIET] gain 4.7 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 7 | link UP 11us | opens 13
+[live] score 0.008 (best 0.008) trig@0.70 | gate 14.1% floor   45 slow | LOUDEST   332/2099 [TOO QUIET] gain 6.3 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 7 | link UP 10us | opens 13
+[live] score 0.004 (best 0.008) trig@0.70 | gate 14.1% floor   45 slow | LOUDEST   313/2099 [TOO QUIET] gain 6.7 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 10us | opens 13
+[live] score 0.008 (best 0.008) trig@0.70 | gate 14.1% floor   45 slow | LOUDEST   313/2099 [TOO QUIET] gain 6.7 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 13us | opens 13
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.1% floor   45 slow | LOUDEST   273/2099 [TOO QUIET] gain 7.7 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 11us | opens 13
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.0% floor   45 slow | LOUDEST   334/2099 [TOO QUIET] gain 6.3 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 12us | opens 13
+[live] score 0.012 (best 0.012) trig@0.70 | gate 14.0% floor   45 slow | LOUDEST   247/2099 [TOO QUIET] gain 8.5 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 15us | opens 13
+[live] score 0.004 (best 0.012) trig@0.70 | gate 14.0% floor   46 slow | LOUDEST   436/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 16us | opens 13
+[live] score 0.004 (best 0.012) trig@0.70 | gate 14.0% floor   48 slow | LOUDEST   320/2099 [TOO QUIET] gain 6.6 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 7 | link UP 20us | opens 13
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        130156 B   127.1 KB   [total 331532 - min-free 201376]
+  TOTAL INTERNAL SRAM        193636 B   189.1 KB   = 73.9% of 256 KB
+  headroom left               68508 B    66.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.004 (best 0.012) trig@0.70 | gate 14.0% floor   49 slow | LOUDEST   221/2099 [TOO QUIET] gain 9.5 | front 0.71 infer 27.8 | CPU 10% = 7 front + 3 net | hits 7 | link UP 18us | opens 13
+[live] score 0.008 (best 0.012) trig@0.70 | gate 14.0% floor   49 slow | LOUDEST   266/2099 [TOO QUIET] gain 7.9 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 9us | opens 13
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.9% floor   49 slow | LOUDEST   349/2099 [TOO QUIET] gain 6.0 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 9us | opens 13
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.9% floor   47 slow | LOUDEST   360/2099 [TOO QUIET] gain 5.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 11us | opens 13
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.9% floor   47 slow | LOUDEST   358/2099 [TOO QUIET] gain 5.9 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 7 | link UP 10us | opens 13
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.9% floor   47 slow | LOUDEST   394/2099 [TOO QUIET] gain 5.3 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 10us | opens 13
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.9% floor   49 slow | LOUDEST   544/2099 [TOO QUIET] gain 3.9 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 10us | opens 13
+[live] score 0.008 (best 0.012) trig@0.70 | gate 13.9% floor   46 slow | LOUDEST   374/2099 [TOO QUIET] gain 5.6 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 7 | link UP 10us | opens 13
+[live] score 0.008 (best 0.008) trig@0.70 | gate 13.9% floor   44 slow | LOUDEST   317/2099 [TOO QUIET] gain 6.6 | front 0.50 infer 27.7 | CPU 8% = 5 front + 3 net | hits 7 | link UP 10us | opens 13
+[live] score 0.062 (best 0.387) trig@0.70 | gate 14.0% floor   48 FAST | LOUDEST   456/2099 [TOO QUIET] gain 4.6 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 17us | opens 14
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        130156 B   127.1 KB   [total 331532 - min-free 201376]
+  TOTAL INTERNAL SRAM        193636 B   189.1 KB   = 73.9% of 256 KB
+  headroom left               68508 B    66.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.023 (best 0.039) trig@0.70 | gate 14.0% floor   47 FAST | LOUDEST   575/2099 [TOO QUIET] gain 3.6 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 11us | opens 15
+[live] score 0.008 (best 0.387) trig@0.70 | gate 14.1% floor   56 slow | LOUDEST   449/2099 [TOO QUIET] gain 4.7 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 14us | opens 15
+[live] score 0.516 (best 0.516) trig@0.70 | gate 14.2% floor   73 FAST | LOUDEST   493/2099 [TOO QUIET] gain 4.3 | front 0.57 infer 27.6 | CPU 9% = 6 front + 3 net | hits 7 | link UP 18us | opens 16
+[live] score 0.262 (best 0.285) trig@0.70 | gate 14.3% floor   71 FAST | LOUDEST   422/2099 [TOO QUIET] gain 5.0 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 15us | opens 17
+[live] score 0.156 (best 0.355) trig@0.70 | gate 14.4% floor   97 FAST | LOUDEST   532/2099 [TOO QUIET] gain 3.9 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 7 | link UP 18us | opens 18
+[live] score 0.137 (best 0.484) trig@0.70 | gate 14.4% floor  111 slow | LOUDEST   577/2099 [TOO QUIET] gain 3.6 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 16us | opens 19
+[live] score 0.125 (best 0.125) trig@0.70 | gate 14.5% floor   73 FAST | LOUDEST   378/2099 [TOO QUIET] gain 5.5 | front 0.51 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 23us | opens 20
+[live] score 0.059 (best 0.156) trig@0.70 | gate 14.6% floor   73 slow | LOUDEST   463/2099 [TOO QUIET] gain 4.5 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 14us | opens 21
+[live] score 0.086 (best 0.086) trig@0.70 | gate 14.6% floor   56 FAST | LOUDEST   679/2099 [TOO QUIET] gain 3.1 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 15us | opens 22
+[live] score 0.246 (best 0.484) trig@0.70 | gate 14.7% floor   68 FAST | LOUDEST   539/2099 [TOO QUIET] gain 3.9 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 7 | link UP 32us | opens 22
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        130156 B   127.1 KB   [total 331532 - min-free 201376]
+  TOTAL INTERNAL SRAM        193636 B   189.1 KB   = 73.9% of 256 KB
+  headroom left               68508 B    66.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+
+  *** PRAHARI ***  #8   score 0.809 (peak-of-2 0.809)   RMS 423   t=1009719 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 1020 ms live | 83 blocks sent | stream #8 OK (endpointed on silence)
+  endpoint: peak block rms 127, quiet below 105, floor 75
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 19 ms (round trip) | END sent 997 ms
+  capture: 1020 ms audio in 993 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.008 (best 0.809) trig@0.70 | gate 14.7% floor   45 slow | LOUDEST   564/2099 [TOO QUIET] gain 3.7 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 8 | link UP 10us | opens 22
+[live] score 0.004 (best 0.012) trig@0.70 | gate 14.7% floor   45 slow | LOUDEST   366/2099 [TOO QUIET] gain 5.7 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 8 | link UP 9us | opens 22
+[live] score 0.004 (best 0.008) trig@0.70 | gate 14.8% floor   46 slow | LOUDEST   238/2099 [TOO QUIET] gain 8.8 | front 0.51 infer 27.6 | CPU 9% = 5 front + 3 net | hits 8 | link UP 15us | opens 23
+[live] score 0.004 (best 0.012) trig@0.70 | gate 14.7% floor   44 slow | LOUDEST   411/2099 [TOO QUIET] gain 5.1 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 8 | link UP 14us | opens 23
+[live] score 0.027 (best 0.027) trig@0.70 | gate 14.8% floor   54 FAST | LOUDEST   373/2099 [TOO QUIET] gain 5.6 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 8 | link UP 13us | opens 24
+[live] score 0.125 (best 0.203) trig@0.70 | gate 14.9% floor   72 FAST | LOUDEST   537/2099 [TOO QUIET] gain 3.9 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 8 | link UP 18us | opens 24
+[live] score 0.008 (best 0.371) trig@0.70 | gate 15.0% floor   67 slow | LOUDEST   552/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 8 | link UP 18us | opens 24
+[live] score 0.191 (best 0.191) trig@0.70 | gate 15.0% floor   70 FAST | LOUDEST   437/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 8 | link UP 17us | opens 25
+
+  *** PRAHARI ***  #9   score 0.906 (peak-of-2 0.906)   RMS 566   t=1055270 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 3360 ms live | 161 blocks sent | stream #9 OK (endpointed on silence)
+  endpoint: peak block rms 516, quiet below 107, floor 77
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 20 ms (round trip) | END sent 3334 ms
+  capture: 3360 ms audio in 3329 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.008 (best 0.906) trig@0.70 | gate 15.1% floor   68 slow | LOUDEST   644/2099 [TOO QUIET] gain 3.3 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 9 | link UP 15us | opens 26
+[live] score 0.203 (best 0.551) trig@0.70 | gate 15.2% floor   68 FAST | LOUDEST   595/2099 [TOO QUIET] gain 3.5 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 9 | link UP 16us | opens 27
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.016 (best 0.328) trig@0.70 | gate 15.3% floor   70 slow | LOUDEST   569/2099 [TOO QUIET] gain 3.7 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 9 | link UP 13us | opens 27
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.3% floor   44 slow | LOUDEST   375/2099 [TOO QUIET] gain 5.6 | front 0.49 infer 27.8 | CPU 8% = 5 front + 4 net | hits 9 | link UP 10us | opens 27
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.2% floor   45 slow | LOUDEST   326/2099 [TOO QUIET] gain 6.4 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 9 | link UP 11us | opens 27
+[live] score 0.129 (best 0.172) trig@0.70 | gate 15.3% floor   57 FAST | LOUDEST   699/2099 [TOO QUIET] gain 3.0 | front 0.50 infer 28.0 | CPU 9% = 5 front + 4 net | hits 9 | link UP 16us | opens 28
+[live] score 0.012 (best 0.246) trig@0.70 | gate 15.4% floor   53 FAST | LOUDEST   800/2099 [TOO QUIET] gain 2.6 | front 0.58 infer 27.7 | CPU 9% = 6 front + 4 net | hits 9 | link UP 26us | opens 29
+[live] score 0.008 (best 0.047) trig@0.70 | gate 15.5% floor   48 slow | LOUDEST   730/2099 [TOO QUIET] gain 2.9 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 12us | opens 29
+[live] score 0.020 (best 0.027) trig@0.70 | gate 15.5% floor   50 FAST | LOUDEST   907/2099 [ok] gain 2.3 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 16us | opens 30
+[live] score 0.008 (best 0.551) trig@0.70 | gate 15.6% floor   46 slow | LOUDEST   329/2099 [TOO QUIET] gain 6.4 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 17us | opens 30
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.6% floor   45 slow | LOUDEST   334/2099 [TOO QUIET] gain 6.3 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 9 | link UP 19us | opens 30
+[live] score 0.008 (best 0.008) trig@0.70 | gate 15.5% floor   44 slow | LOUDEST   432/2099 [TOO QUIET] gain 4.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 23us | opens 30
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.051 (best 0.051) trig@0.70 | gate 15.5% floor   51 FAST | LOUDEST   394/2099 [TOO QUIET] gain 5.3 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 13us | opens 31
+[live] score 0.055 (best 0.328) trig@0.70 | gate 15.6% floor   65 FAST | LOUDEST   426/2099 [TOO QUIET] gain 4.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 18us | opens 31
+[live] score 0.008 (best 0.125) trig@0.70 | gate 15.6% floor   46 slow | LOUDEST   302/2099 [TOO QUIET] gain 6.9 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 9 | link UP 10us | opens 31
+[live] score 0.172 (best 0.484) trig@0.70 | gate 15.7% floor   57 FAST | LOUDEST   608/2099 [TOO QUIET] gain 3.5 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 9 | link UP 16us | opens 32
+[live] score 0.086 (best 0.566) trig@0.70 | gate 15.8% floor   76 FAST | LOUDEST   704/2099 [TOO QUIET] gain 3.0 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 32us | opens 32
+[live] score 0.020 (best 0.184) trig@0.70 | gate 15.9% floor   58 FAST | LOUDEST   708/2099 [TOO QUIET] gain 3.0 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 14us | opens 33
+[live] score 0.059 (best 0.145) trig@0.70 | gate 16.0% floor   68 FAST | LOUDEST  1131/2099 [ok] gain 1.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 18us | opens 33
+[live] score 0.008 (best 0.129) trig@0.70 | gate 16.0% floor   64 slow | LOUDEST   935/2099 [ok] gain 2.2 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 14us | opens 33
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.0% floor   49 slow | LOUDEST   439/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 11us | opens 33
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.0% floor   49 slow | LOUDEST   457/2099 [TOO QUIET] gain 4.6 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 10us | opens 33
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.9% floor   50 slow | LOUDEST   504/2099 [TOO QUIET] gain 4.2 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 9 | link UP 9us | opens 33
+[live] score 0.004 (best 0.012) trig@0.70 | gate 16.0% floor   51 FAST | LOUDEST   474/2099 [TOO QUIET] gain 4.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 14us | opens 34
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.0% floor   50 slow | LOUDEST   647/2099 [TOO QUIET] gain 3.2 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 10us | opens 34
+[live] score 0.016 (best 0.016) trig@0.70 | gate 15.9% floor   53 slow | LOUDEST   340/2099 [TOO QUIET] gain 6.2 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 9us | opens 34
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.9% floor   52 slow | LOUDEST   406/2099 [TOO QUIET] gain 5.2 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 9us | opens 34
+[live] score 0.012 (best 0.016) trig@0.70 | gate 15.9% floor   50 slow | LOUDEST   475/2099 [TOO QUIET] gain 4.4 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 10us | opens 34
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.8% floor   49 slow | LOUDEST   391/2099 [TOO QUIET] gain 5.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 10us | opens 34
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.8% floor   49 slow | LOUDEST   499/2099 [TOO QUIET] gain 4.2 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 10us | opens 34
+[live] score 0.012 (best 0.020) trig@0.70 | gate 15.8% floor   51 slow | LOUDEST   523/2099 [TOO QUIET] gain 4.0 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 10us | opens 34
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.8% floor   50 slow | LOUDEST   355/2099 [TOO QUIET] gain 5.9 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 9 | link UP 9us | opens 34
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.7% floor   50 slow | LOUDEST   357/2099 [TOO QUIET] gain 5.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 12us | opens 34
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.7% floor   48 slow | LOUDEST   480/2099 [TOO QUIET] gain 4.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 10us | opens 34
+[live] score 0.016 (best 0.016) trig@0.70 | gate 15.7% floor   49 slow | LOUDEST   428/2099 [TOO QUIET] gain 4.9 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 9us | opens 34
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.7% floor   50 slow | LOUDEST   464/2099 [TOO QUIET] gain 4.5 | front 0.50 infer 27.7 | CPU 9% = 5 front + 4 net | hits 9 | link UP 10us | opens 34
+[live] score 0.012 (best 0.020) trig@0.70 | gate 15.6% floor   50 slow | LOUDEST   429/2099 [TOO QUIET] gain 4.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 10us | opens 34
+[live] score 0.012 (best 0.016) trig@0.70 | gate 15.6% floor   49 slow | LOUDEST   461/2099 [TOO QUIET] gain 4.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 10us | opens 34
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.6% floor   49 slow | LOUDEST   400/2099 [TOO QUIET] gain 5.3 | front 0.49 infer 27.9 | CPU 9% = 5 front + 4 net | hits 9 | link UP 10us | opens 34
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.6% floor   49 slow | LOUDEST   495/2099 [TOO QUIET] gain 4.2 | front 0.50 infer 27.7 | CPU 9% = 5 front + 4 net | hits 9 | link UP 11us | opens 34
+[live] score 0.004 (best 0.016) trig@0.70 | gate 15.5% floor   52 slow | LOUDEST   378/2099 [TOO QUIET] gain 5.6 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 12us | opens 34
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.5% floor   50 slow | LOUDEST   540/2099 [TOO QUIET] gain 3.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 12us | opens 34
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.211 (best 0.211) trig@0.70 | gate 15.6% floor   54 FAST | LOUDEST   799/2099 [TOO QUIET] gain 2.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 14us | opens 35
+[live] score 0.402 (best 0.402) trig@0.70 | gate 15.6% floor   63 FAST | LOUDEST   872/2099 [ok] gain 2.4 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 18us | opens 35
+[live] score 0.109 (best 0.371) trig@0.70 | gate 15.7% floor   78 FAST | LOUDEST   656/2099 [TOO QUIET] gain 3.2 | front 0.50 infer 27.8 | CPU 9% = 5 front + 4 net | hits 9 | link UP 20us | opens 35
+[live] score 0.008 (best 0.246) trig@0.70 | gate 15.7% floor   57 slow | LOUDEST   507/2099 [TOO QUIET] gain 4.1 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 9 | link UP 10us | opens 35
+[live] score 0.008 (best 0.047) trig@0.70 | gate 15.8% floor   54 slow | LOUDEST   445/2099 [TOO QUIET] gain 4.7 | front 0.51 infer 27.6 | CPU 9% = 5 front + 4 net | hits 9 | link UP 12us | opens 36
+[live] score 0.285 (best 0.629) trig@0.70 | gate 15.9% floor   57 FAST | LOUDEST  1242/2099 [ok] gain 1.7 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 9 | link UP 17us | opens 37
+
+  *** PRAHARI ***  #10   score 0.727 (peak-of-2 0.727)   RMS 1041   t=1368710 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 2700 ms live | 139 blocks sent | stream #10 OK (endpointed on silence)
+  endpoint: peak block rms 827, quiet below 149, floor 58
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 20 ms (round trip) | END sent 2662 ms
+  capture: 2700 ms audio in 2658 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+
+  *** PRAHARI ***  #11   score 0.809 (peak-of-2 0.809)   RMS 975   t=1373206 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 4260 ms live | 191 blocks sent | stream #11 OK (endpointed on silence)
+  endpoint: peak block rms 966, quiet below 174, floor 57
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 36 ms (round trip) | END sent 4230 ms
+  capture: 4260 ms audio in 4225 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.012 (best 0.809) trig@0.70 | gate 15.9% floor   56 FAST | LOUDEST  1323/2099 [ok] gain 1.6 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 11 | link UP 13us | opens 39
+[live] score 0.105 (best 0.105) trig@0.70 | gate 16.0% floor   64 FAST | LOUDEST   905/2099 [ok] gain 2.3 | front 0.51 infer 27.6 | CPU 9% = 5 front + 4 net | hits 11 | link UP 18us | opens 39
+
+  *** PRAHARI ***  #12   score 0.754 (peak-of-2 0.754)   RMS 598   t=1380230 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 1110 ms live | 86 blocks sent | stream #12 OK (endpointed on silence)
+  endpoint: peak block rms 589, quiet below 106, floor 72
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 20 ms (round trip) | END sent 1078 ms
+  capture: 1110 ms audio in 1073 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.016 (best 0.754) trig@0.70 | gate 16.1% floor   74 FAST | LOUDEST   674/2099 [TOO QUIET] gain 3.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 12 | link UP 17us | opens 40
+[live] score 0.191 (best 0.418) trig@0.70 | gate 16.1% floor   81 FAST | LOUDEST   761/2099 [TOO QUIET] gain 2.8 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 12 | link UP 21us | opens 40
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.066 (best 0.688) trig@0.70 | gate 16.2% floor   77 FAST | LOUDEST  1218/2099 [ok] gain 1.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 12 | link UP 18us | opens 41
+[live] score 0.012 (best 0.645) trig@0.70 | gate 16.2% floor   58 slow | LOUDEST   752/2099 [TOO QUIET] gain 2.8 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 12 | link UP 11us | opens 41
+[live] score 0.137 (best 0.137) trig@0.70 | gate 16.3% floor   54 FAST | LOUDEST   681/2099 [TOO QUIET] gain 3.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 12 | link UP 15us | opens 42
+
+  *** PRAHARI ***  #13   score 0.809 (peak-of-2 0.809)   RMS 281   t=1395014 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 1020 ms live | 83 blocks sent | stream #13 OK (endpointed on silence)
+  endpoint: peak block rms 82, quiet below 88, floor 63
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 36 ms (round trip) | END sent 998 ms
+  capture: 1020 ms audio in 993 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.012 (best 0.809) trig@0.70 | gate 16.3% floor   52 slow | LOUDEST   858/2099 [ok] gain 2.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 13 | link UP 10us | opens 42
+[live] score 0.031 (best 0.031) trig@0.70 | gate 16.3% floor   51 FAST | LOUDEST   960/2099 [ok] gain 2.2 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 13 | link UP 14us | opens 43
+[live] score 0.109 (best 0.129) trig@0.70 | gate 16.4% floor   58 FAST | LOUDEST  1075/2099 [ok] gain 2.0 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 13 | link UP 18us | opens 43
+[live] score 0.016 (best 0.449) trig@0.70 | gate 16.4% floor   68 FAST | LOUDEST   919/2099 [ok] gain 2.3 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 13 | link UP 19us | opens 43
+[live] score 0.008 (best 0.094) trig@0.70 | gate 16.5% floor   53 slow | LOUDEST   420/2099 [TOO QUIET] gain 5.0 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 13 | link UP 10us | opens 43
+[live] score 0.016 (best 0.066) trig@0.70 | gate 16.5% floor   55 FAST | LOUDEST   469/2099 [TOO QUIET] gain 4.5 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 13 | link UP 20us | opens 45
+[live] score 0.004 (best 0.223) trig@0.70 | gate 16.6% floor   54 slow | LOUDEST   425/2099 [TOO QUIET] gain 4.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 13 | link UP 13us | opens 45
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.020 (best 0.164) trig@0.70 | gate 16.6% floor   56 FAST | LOUDEST  1001/2099 [ok] gain 2.1 | front 0.50 infer 27.7 | CPU 9% = 5 front + 4 net | hits 13 | link UP 15us | opens 46
+[live] score 0.312 (best 0.484) trig@0.70 | gate 16.7% floor   66 FAST | LOUDEST  1118/2099 [ok] gain 1.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 13 | link UP 18us | opens 46
+[live] score 0.145 (best 0.402) trig@0.70 | gate 16.8% floor   84 FAST | LOUDEST   739/2099 [TOO QUIET] gain 2.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 13 | link UP 27us | opens 46
+[live] score 0.008 (best 0.203) trig@0.70 | gate 16.8% floor   58 FAST | LOUDEST   546/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 13 | link UP 12us | opens 47
+[live] score 0.172 (best 0.234) trig@0.70 | gate 16.9% floor   68 FAST | LOUDEST  1043/2099 [ok] gain 2.0 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 13 | link UP 17us | opens 47
+[live] score 0.008 (best 0.566) trig@0.70 | gate 16.9% floor   57 slow | LOUDEST   473/2099 [TOO QUIET] gain 4.4 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 13 | link UP 11us | opens 47
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.9% floor   51 slow | LOUDEST   576/2099 [TOO QUIET] gain 3.6 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 13 | link UP 9us | opens 47
+[live] score 0.012 (best 0.016) trig@0.70 | gate 16.9% floor   51 slow | LOUDEST   348/2099 [TOO QUIET] gain 6.0 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 13 | link UP 9us | opens 47
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.8% floor   52 slow | LOUDEST   410/2099 [TOO QUIET] gain 5.1 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 13 | link UP 9us | opens 47
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.8% floor   51 slow | LOUDEST   467/2099 [TOO QUIET] gain 4.5 | front 0.49 infer 27.8 | CPU 9% = 5 front + 4 net | hits 13 | link UP 10us | opens 47
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.172 (best 0.172) trig@0.70 | gate 16.8% floor   61 FAST | LOUDEST   625/2099 [TOO QUIET] gain 3.4 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 13 | link UP 14us | opens 48
+
+  *** PRAHARI ***  #14   score 0.754 (peak-of-2 0.754)   RMS 519   t=1480518 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 2880 ms live | 145 blocks sent | stream #14 OK (endpointed on silence)
+  endpoint: peak block rms 1196, quiet below 215, floor 63
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 36 ms (round trip) | END sent 2854 ms
+  capture: 2880 ms audio in 2849 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+
+  *** PRAHARI ***  #15   score 0.738 (peak-of-2 0.738)   RMS 811   t=1485191 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 2160 ms live | 121 blocks sent | stream #15 OK (endpointed on silence)
+  endpoint: peak block rms 1310, quiet below 236, floor 64
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 19 ms (round trip) | END sent 2133 ms
+  capture: 2160 ms audio in 2129 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.012 (best 0.754) trig@0.70 | gate 16.9% floor   60 slow | LOUDEST   817/2099 [TOO QUIET] gain 2.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 15 | link UP 12us | opens 49
+[live] score 0.203 (best 0.355) trig@0.70 | gate 16.9% floor   57 FAST | LOUDEST  1103/2099 [ok] gain 1.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 15 | link UP 15us | opens 50
+
+  *** PRAHARI ***  #16   score 0.941 (peak-of-2 0.941)   RMS 565   t=1494071 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 3930 ms live | 180 blocks sent | stream #16 OK (endpointed on silence)
+  endpoint: peak block rms 1337, quiet below 241, floor 59
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 19 ms (round trip) | END sent 3909 ms
+  capture: 3930 ms audio in 3904 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.008 (best 0.941) trig@0.70 | gate 16.9% floor   51 slow | LOUDEST   772/2099 [TOO QUIET] gain 2.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 16 | link UP 10us | opens 50
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.9% floor   51 slow | LOUDEST   485/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 16 | link UP 10us | opens 50
+[live] score 0.066 (best 0.066) trig@0.70 | gate 16.9% floor   54 FAST | LOUDEST   636/2099 [TOO QUIET] gain 3.3 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 16 | link UP 16us | opens 51
+[live] score 0.191 (best 0.191) trig@0.70 | gate 16.9% floor   66 FAST | LOUDEST   993/2099 [ok] gain 2.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 16 | link UP 19us | opens 51
+[live] score 0.059 (best 0.613) trig@0.70 | gate 17.0% floor   77 FAST | LOUDEST   818/2099 [TOO QUIET] gain 2.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 16 | link UP 20us | opens 51
+[live] score 0.262 (best 0.371) trig@0.70 | gate 17.1% floor   92 FAST | LOUDEST   728/2099 [TOO QUIET] gain 2.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 16 | link UP 21us | opens 51
+[live] score 0.145 (best 0.246) trig@0.70 | gate 17.1% floor  119 FAST | LOUDEST   811/2099 [TOO QUIET] gain 2.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 16 | link UP 20us | opens 51
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+
+  *** PRAHARI ***  #17   score 0.766 (peak-of-2 0.766)   RMS 274   t=1525366 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 3030 ms live | 150 blocks sent | stream #17 OK (endpointed on silence)
+  endpoint: peak block rms 1205, quiet below 217, floor 131
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 52 ms (round trip) | END sent 2998 ms
+  capture: 3030 ms audio in 2994 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.008 (best 0.766) trig@0.70 | gate 17.2% floor   61 slow | LOUDEST   807/2099 [TOO QUIET] gain 2.6 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 51
+[live] score 0.008 (best 0.012) trig@0.70 | gate 17.1% floor   50 slow | LOUDEST   547/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 51
+[live] score 0.012 (best 0.012) trig@0.70 | gate 17.1% floor   50 slow | LOUDEST   520/2099 [TOO QUIET] gain 4.0 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 51
+[live] score 0.008 (best 0.012) trig@0.70 | gate 17.1% floor   51 slow | LOUDEST   444/2099 [TOO QUIET] gain 4.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 51
+[live] score 0.012 (best 0.031) trig@0.70 | gate 17.1% floor   55 FAST | LOUDEST   474/2099 [TOO QUIET] gain 4.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 14us | opens 52
+[live] score 0.008 (best 0.055) trig@0.70 | gate 17.1% floor   52 slow | LOUDEST   467/2099 [TOO QUIET] gain 4.5 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 52
+[live] score 0.012 (best 0.012) trig@0.70 | gate 17.1% floor   55 slow | LOUDEST   492/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 52
+[live] score 0.008 (best 0.012) trig@0.70 | gate 17.0% floor   57 slow | LOUDEST   512/2099 [TOO QUIET] gain 4.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 52
+[live] score 0.008 (best 0.012) trig@0.70 | gate 17.0% floor   57 slow | LOUDEST   489/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 52
+[live] score 0.008 (best 0.012) trig@0.70 | gate 17.0% floor   56 slow | LOUDEST   508/2099 [TOO QUIET] gain 4.1 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 52
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.012) trig@0.70 | gate 17.0% floor   53 slow | LOUDEST   340/2099 [TOO QUIET] gain 6.2 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 52
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.9% floor   51 slow | LOUDEST   627/2099 [TOO QUIET] gain 3.3 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 52
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.9% floor   51 slow | LOUDEST   371/2099 [TOO QUIET] gain 5.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 12us | opens 52
+[live] score 0.008 (best 0.020) trig@0.70 | gate 16.9% floor   52 slow | LOUDEST   407/2099 [TOO QUIET] gain 5.2 | front 0.50 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 12us | opens 52
+[live] score 0.008 (best 0.008) trig@0.70 | gate 16.9% floor   51 slow | LOUDEST   532/2099 [TOO QUIET] gain 3.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 13us | opens 52
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.8% floor   55 slow | LOUDEST   567/2099 [TOO QUIET] gain 3.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 13us | opens 52
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.8% floor   51 slow | LOUDEST   438/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 16us | opens 52
+[live] score 0.012 (best 0.016) trig@0.70 | gate 16.8% floor   52 slow | LOUDEST   379/2099 [TOO QUIET] gain 5.5 | front 0.49 infer 28.1 | CPU 9% = 5 front + 4 net | hits 17 | link UP 20us | opens 52
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.7% floor   52 slow | LOUDEST   352/2099 [TOO QUIET] gain 6.0 | front 0.69 infer 27.7 | CPU 11% = 7 front + 4 net | hits 17 | link UP 19us | opens 52
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.7% floor   52 slow | LOUDEST   427/2099 [TOO QUIET] gain 4.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 52
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.7% floor   52 slow | LOUDEST   397/2099 [TOO QUIET] gain 5.3 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 52
+[live] score 0.008 (best 0.008) trig@0.70 | gate 16.7% floor   51 slow | LOUDEST   493/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 52
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.7% floor   51 slow | LOUDEST   486/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 52
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.6% floor   51 slow | LOUDEST   542/2099 [TOO QUIET] gain 3.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 52
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.6% floor   51 slow | LOUDEST   588/2099 [TOO QUIET] gain 3.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 52
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.6% floor   51 slow | LOUDEST   527/2099 [TOO QUIET] gain 4.0 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 52
+[live] score 0.012 (best 0.016) trig@0.70 | gate 16.6% floor   53 slow | LOUDEST   284/2099 [TOO QUIET] gain 7.4 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 52
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.5% floor   56 slow | LOUDEST   444/2099 [TOO QUIET] gain 4.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 11us | opens 52
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.5% floor   54 slow | LOUDEST   401/2099 [TOO QUIET] gain 5.2 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 52
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.5% floor   52 slow | LOUDEST   600/2099 [TOO QUIET] gain 3.5 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 11us | opens 52
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.5% floor   52 slow | LOUDEST   444/2099 [TOO QUIET] gain 4.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 52
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.4% floor   52 slow | LOUDEST   526/2099 [TOO QUIET] gain 4.0 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 52
+[live] score 0.016 (best 0.016) trig@0.70 | gate 16.4% floor   54 slow | LOUDEST   572/2099 [TOO QUIET] gain 3.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 52
+[live] score 0.012 (best 0.020) trig@0.70 | gate 16.4% floor   53 slow | LOUDEST   606/2099 [TOO QUIET] gain 3.5 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 52
+[live] score 0.008 (best 0.008) trig@0.70 | gate 16.4% floor   53 slow | LOUDEST   453/2099 [TOO QUIET] gain 4.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 52
+[live] score 0.016 (best 0.023) trig@0.70 | gate 16.4% floor   57 FAST | LOUDEST   564/2099 [TOO QUIET] gain 3.7 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 23us | opens 53
+[live] score 0.004 (best 0.145) trig@0.70 | gate 16.4% floor   62 slow | LOUDEST   526/2099 [TOO QUIET] gain 4.0 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 11us | opens 53
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.4% floor   54 slow | LOUDEST   587/2099 [TOO QUIET] gain 3.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 11us | opens 53
+[live] score 0.027 (best 0.027) trig@0.70 | gate 16.4% floor   58 FAST | LOUDEST   444/2099 [TOO QUIET] gain 4.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 14us | opens 54
+[live] score 0.004 (best 0.051) trig@0.70 | gate 16.4% floor   53 slow | LOUDEST   701/2099 [TOO QUIET] gain 3.0 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 11us | opens 54
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.4% floor   52 slow | LOUDEST   453/2099 [TOO QUIET] gain 4.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 54
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.4% floor   53 slow | LOUDEST   611/2099 [TOO QUIET] gain 3.4 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 54
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.3% floor   51 slow | LOUDEST   584/2099 [TOO QUIET] gain 3.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 54
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.3% floor   55 slow | LOUDEST   550/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 54
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.3% floor   56 slow | LOUDEST   551/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 54
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.3% floor   54 slow | LOUDEST   349/2099 [TOO QUIET] gain 6.0 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 54
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.3% floor   59 slow | LOUDEST   768/2099 [TOO QUIET] gain 2.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 11us | opens 54
+[live] score 0.012 (best 0.016) trig@0.70 | gate 16.2% floor   56 slow | LOUDEST   636/2099 [TOO QUIET] gain 3.3 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 54
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.2% floor   57 slow | LOUDEST   730/2099 [TOO QUIET] gain 2.9 | front 0.49 infer 28.2 | CPU 9% = 5 front + 4 net | hits 17 | link UP 9us | opens 54
+[live] score 0.008 (best 0.027) trig@0.70 | gate 16.2% floor   56 slow | LOUDEST   463/2099 [TOO QUIET] gain 4.5 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 11us | opens 54
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.2% floor   54 slow | LOUDEST   423/2099 [TOO QUIET] gain 5.0 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 54
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.2% floor   56 slow | LOUDEST   577/2099 [TOO QUIET] gain 3.6 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 10us | opens 54
+[live] score 0.008 (best 0.020) trig@0.70 | gate 16.2% floor   54 slow | LOUDEST   435/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 11us | opens 54
+[live] score 0.016 (best 0.020) trig@0.70 | gate 16.1% floor   55 slow | LOUDEST   488/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 11us | opens 54
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.1% floor   56 slow | LOUDEST   404/2099 [TOO QUIET] gain 5.2 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 13us | opens 54
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.1% floor   56 slow | LOUDEST   405/2099 [TOO QUIET] gain 5.2 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 13us | opens 54
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.1% floor   56 slow | LOUDEST   564/2099 [TOO QUIET] gain 3.7 | front 0.49 infer 28.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 17us | opens 54
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.1% floor   56 slow | LOUDEST   718/2099 [TOO QUIET] gain 2.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 18us | opens 54
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.1% floor   51 slow | LOUDEST   850/2099 [ok] gain 2.5 | front 0.49 infer 28.0 | CPU 9% = 5 front + 4 net | hits 17 | link UP 20us | opens 54
+[live] score 0.012 (best 0.016) trig@0.70 | gate 16.0% floor   51 slow | LOUDEST   487/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 11us | opens 54
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.047 (best 0.047) trig@0.70 | gate 16.1% floor   62 FAST | LOUDEST   582/2099 [TOO QUIET] gain 3.6 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 15us | opens 55
+[live] score 0.051 (best 0.402) trig@0.70 | gate 16.1% floor   79 FAST | LOUDEST   607/2099 [TOO QUIET] gain 3.5 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 19us | opens 55
+[live] score 0.516 (best 0.516) trig@0.70 | gate 16.2% floor   86 FAST | LOUDEST   780/2099 [TOO QUIET] gain 2.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 17us | opens 56
+[live] score 0.012 (best 0.371) trig@0.70 | gate 16.2% floor   67 slow | LOUDEST   680/2099 [TOO QUIET] gain 3.1 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 12us | opens 56
+[live] score 0.016 (best 0.098) trig@0.70 | gate 16.2% floor   69 FAST | LOUDEST   873/2099 [ok] gain 2.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 18us | opens 57
+[live] score 0.355 (best 0.355) trig@0.70 | gate 16.3% floor   80 FAST | LOUDEST   691/2099 [TOO QUIET] gain 3.0 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 19us | opens 57
+[live] score 0.020 (best 0.285) trig@0.70 | gate 16.3% floor   62 FAST | LOUDEST   686/2099 [TOO QUIET] gain 3.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 13us | opens 58
+[live] score 0.246 (best 0.301) trig@0.70 | gate 16.4% floor   78 FAST | LOUDEST   736/2099 [TOO QUIET] gain 2.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 18us | opens 58
+[live] score 0.094 (best 0.531) trig@0.70 | gate 16.4% floor  114 FAST | LOUDEST   829/2099 [TOO QUIET] gain 2.5 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 17 | link UP 19us | opens 58
+[live] score 0.020 (best 0.312) trig@0.70 | gate 16.5% floor   94 FAST | LOUDEST   621/2099 [TOO QUIET] gain 3.4 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 17 | link UP 25us | opens 60
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+
+  *** PRAHARI ***  #18   score 0.766 (peak-of-2 0.766)   RMS 518   t=2100678 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 1080 ms live | 85 blocks sent | stream #18 OK (endpointed on silence)
+  endpoint: peak block rms 509, quiet below 193, floor 138
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 20 ms (round trip) | END sent 1046 ms
+  capture: 1080 ms audio in 1041 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.328 (best 0.766) trig@0.70 | gate 16.5% floor  127 FAST | LOUDEST   859/2099 [ok] gain 2.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 17us | opens 61
+[live] score 0.449 (best 0.449) trig@0.70 | gate 16.6% floor   70 FAST | LOUDEST   512/2099 [TOO QUIET] gain 4.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 16us | opens 62
+[live] score 0.035 (best 0.043) trig@0.70 | gate 16.6% floor   55 FAST | LOUDEST   673/2099 [TOO QUIET] gain 3.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 14us | opens 63
+[live] score 0.012 (best 0.086) trig@0.70 | gate 16.6% floor   51 slow | LOUDEST   519/2099 [TOO QUIET] gain 4.0 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 9us | opens 63
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.6% floor   52 slow | LOUDEST   499/2099 [TOO QUIET] gain 4.2 | front 0.50 infer 27.7 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 63
+[live] score 0.004 (best 0.012) trig@0.70 | gate 16.6% floor   51 slow | LOUDEST   610/2099 [TOO QUIET] gain 3.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 63
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.5% floor   49 slow | LOUDEST   432/2099 [TOO QUIET] gain 4.9 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 63
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.5% floor   49 slow | LOUDEST   462/2099 [TOO QUIET] gain 4.5 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 63
+[live] score 0.012 (best 0.016) trig@0.70 | gate 16.5% floor   50 slow | LOUDEST   484/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 28.2 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 63
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.5% floor   52 slow | LOUDEST   406/2099 [TOO QUIET] gain 5.2 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 63
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.5% floor   52 slow | LOUDEST   559/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 11us | opens 64
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.5% floor   51 slow | LOUDEST   554/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 64
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.5% floor   51 slow | LOUDEST   486/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 64
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.5% floor   51 slow | LOUDEST   516/2099 [TOO QUIET] gain 4.1 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 18 | link UP 11us | opens 64
+[live] score 0.012 (best 0.020) trig@0.70 | gate 16.4% floor   49 slow | LOUDEST   567/2099 [TOO QUIET] gain 3.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 64
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.4% floor   53 slow | LOUDEST   598/2099 [TOO QUIET] gain 3.5 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 64
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.5% floor   57 slow | LOUDEST   630/2099 [TOO QUIET] gain 3.3 | front 0.49 infer 27.9 | CPU 9% = 5 front + 4 net | hits 18 | link UP 14us | opens 65
+[live] score 0.012 (best 0.023) trig@0.70 | gate 16.4% floor   58 slow | LOUDEST   618/2099 [TOO QUIET] gain 3.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 9us | opens 65
+[live] score 0.012 (best 0.016) trig@0.70 | gate 16.4% floor   55 slow | LOUDEST   533/2099 [TOO QUIET] gain 3.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 9us | opens 65
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.4% floor   52 slow | LOUDEST   534/2099 [TOO QUIET] gain 3.9 | front 0.57 infer 27.6 | CPU 10% = 6 front + 4 net | hits 18 | link UP 10us | opens 65
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.4% floor   55 slow | LOUDEST   501/2099 [TOO QUIET] gain 4.2 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 9us | opens 65
+[live] score 0.012 (best 0.016) trig@0.70 | gate 16.4% floor   53 slow | LOUDEST   627/2099 [TOO QUIET] gain 3.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 65
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.4% floor   51 slow | LOUDEST   545/2099 [TOO QUIET] gain 3.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 65
+[live] score 0.004 (best 0.016) trig@0.70 | gate 16.3% floor   51 slow | LOUDEST   630/2099 [TOO QUIET] gain 3.3 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 65
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.3% floor   49 slow | LOUDEST   464/2099 [TOO QUIET] gain 4.5 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 9us | opens 65
+[live] score 0.012 (best 0.016) trig@0.70 | gate 16.3% floor   49 slow | LOUDEST   460/2099 [TOO QUIET] gain 4.6 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 11us | opens 65
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.3% floor   49 slow | LOUDEST   436/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 65
+[live] score 0.020 (best 0.020) trig@0.70 | gate 16.3% floor   51 FAST | LOUDEST   599/2099 [TOO QUIET] gain 3.5 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 10us | opens 66
+[live] score 0.012 (best 0.016) trig@0.70 | gate 16.3% floor   49 slow | LOUDEST   325/2099 [TOO QUIET] gain 6.5 | front 0.51 infer 27.6 | CPU 9% = 5 front + 4 net | hits 18 | link UP 11us | opens 66
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+
+  *** PRAHARI ***  #19   score 0.828 (peak-of-2 0.828)   RMS 206   t=2346198 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 1080 ms live | 85 blocks sent | stream #19 OK (endpointed on silence)
+  endpoint: peak block rms 767, quiet below 138, floor 58
+  latency: keyword -> link ready 1 ms (already open) | header in TCP 2 ms | server ACK 20 ms (round trip) | END sent 1046 ms
+  capture: 1080 ms audio in 1042 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.008 (best 0.828) trig@0.70 | gate 16.3% floor   56 slow | LOUDEST   777/2099 [TOO QUIET] gain 2.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 14us | opens 67
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.3% floor   50 slow | LOUDEST   532/2099 [TOO QUIET] gain 3.9 | front 0.49 infer 28.7 | CPU 9% = 5 front + 4 net | hits 19 | link UP 23us | opens 67
+[live] score 0.004 (best 0.012) trig@0.70 | gate 16.3% floor   49 slow | LOUDEST   584/2099 [TOO QUIET] gain 3.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 9us | opens 67
+[live] score 0.012 (best 0.020) trig@0.70 | gate 16.3% floor   51 slow | LOUDEST   465/2099 [TOO QUIET] gain 4.5 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 10us | opens 67
+[live] score 0.012 (best 0.020) trig@0.70 | gate 16.3% floor   49 FAST | LOUDEST   442/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 13us | opens 68
+[live] score 0.008 (best 0.023) trig@0.70 | gate 16.3% floor   48 slow | LOUDEST   453/2099 [TOO QUIET] gain 4.6 | front 0.49 infer 28.0 | CPU 9% = 5 front + 4 net | hits 19 | link UP 10us | opens 68
+[live] score 0.016 (best 0.016) trig@0.70 | gate 16.3% floor   52 FAST | LOUDEST   598/2099 [TOO QUIET] gain 3.5 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 15us | opens 69
+[live] score 0.012 (best 0.016) trig@0.70 | gate 16.3% floor   49 slow | LOUDEST   508/2099 [TOO QUIET] gain 4.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 11us | opens 69
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.3% floor   48 slow | LOUDEST   364/2099 [TOO QUIET] gain 5.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 10us | opens 69
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.3% floor   47 slow | LOUDEST   414/2099 [TOO QUIET] gain 5.1 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 10us | opens 69
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.012 (best 0.016) trig@0.70 | gate 16.2% floor   47 slow | LOUDEST   295/2099 [TOO QUIET] gain 7.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 12us | opens 69
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.2% floor   48 slow | LOUDEST   554/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 9us | opens 69
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.2% floor   50 slow | LOUDEST   541/2099 [TOO QUIET] gain 3.9 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 10us | opens 69
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.2% floor   47 slow | LOUDEST   622/2099 [TOO QUIET] gain 3.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 10us | opens 69
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.2% floor   48 slow | LOUDEST   544/2099 [TOO QUIET] gain 3.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 10us | opens 69
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.2% floor   48 slow | LOUDEST   622/2099 [TOO QUIET] gain 3.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 10us | opens 69
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.1% floor   48 slow | LOUDEST   453/2099 [TOO QUIET] gain 4.6 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 19 | link UP 11us | opens 69
+[live] score 0.016 (best 0.016) trig@0.70 | gate 16.1% floor   47 slow | LOUDEST   534/2099 [TOO QUIET] gain 3.9 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 12us | opens 69
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.1% floor   46 slow | LOUDEST   531/2099 [TOO QUIET] gain 4.0 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 14us | opens 69
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.1% floor   47 slow | LOUDEST   489/2099 [TOO QUIET] gain 4.3 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 14us | opens 69
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.1% floor   48 slow | LOUDEST   473/2099 [TOO QUIET] gain 4.4 | front 0.49 infer 28.1 | CPU 9% = 5 front + 4 net | hits 19 | link UP 17us | opens 69
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.1% floor   47 slow | LOUDEST   557/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 20us | opens 69
+[live] score 0.008 (best 0.008) trig@0.70 | gate 16.1% floor   47 slow | LOUDEST   614/2099 [TOO QUIET] gain 3.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 9us | opens 69
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.1% floor   50 slow | LOUDEST   472/2099 [TOO QUIET] gain 4.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 9us | opens 69
+[live] score 0.020 (best 0.020) trig@0.70 | gate 16.0% floor   49 slow | LOUDEST   490/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 10us | opens 69
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.0% floor   49 slow | LOUDEST   462/2099 [TOO QUIET] gain 4.5 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 9us | opens 69
+[live] score 0.688 (best 0.688) trig@0.70 | gate 16.0% floor   53 FAST | LOUDEST   964/2099 [ok] gain 2.2 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 19 | link UP 13us | opens 70
+
+  *** PRAHARI ***  #20   score 0.777 (peak-of-2 0.777)   RMS 445   t=2583798 ms
+
+  uplink: WARM link | 1500 ms pre-roll + 1770 ms live | 108 blocks sent | stream #20 OK (endpointed on silence)
+  endpoint: peak block rms 829, quiet below 149, floor 55
+  latency: keyword -> link ready 2 ms (already open) | header in TCP 3 ms | server ACK 36 ms (round trip) | END sent 1734 ms
+  capture: 1770 ms audio in 1728 ms wall | backlog peak 49 blocks (1470 ms) | mic held 0 ms | clean - nothing lost
+[live] score 0.008 (best 0.777) trig@0.70 | gate 16.0% floor   52 slow | LOUDEST   757/2099 [TOO QUIET] gain 2.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 70
+[live] score 0.008 (best 0.016) trig@0.70 | gate 16.0% floor   54 slow | LOUDEST   584/2099 [TOO QUIET] gain 3.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 70
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.0% floor   55 slow | LOUDEST   493/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 70
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.246 (best 0.246) trig@0.70 | gate 16.0% floor   58 FAST | LOUDEST  3623/2099 [ok] gain 0.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 13us | opens 71
+[live] score 0.012 (best 0.516) trig@0.70 | gate 16.0% floor   60 slow | LOUDEST  2906/2099 [ok] gain 0.7 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 16us | opens 71
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.0% floor   54 slow | LOUDEST   415/2099 [TOO QUIET] gain 5.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 71
+[live] score 0.016 (best 0.016) trig@0.70 | gate 16.0% floor   55 slow | LOUDEST   442/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 11us | opens 71
+[live] score 0.012 (best 0.016) trig@0.70 | gate 16.0% floor   52 slow | LOUDEST   535/2099 [TOO QUIET] gain 3.9 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 71
+[live] score 0.008 (best 0.012) trig@0.70 | gate 16.0% floor   53 slow | LOUDEST   524/2099 [TOO QUIET] gain 4.0 | front 0.49 infer 27.8 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 71
+[live] score 0.008 (best 0.008) trig@0.70 | gate 16.0% floor   53 slow | LOUDEST   591/2099 [TOO QUIET] gain 3.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 71
+[live] score 0.012 (best 0.012) trig@0.70 | gate 16.0% floor   51 slow | LOUDEST   665/2099 [TOO QUIET] gain 3.2 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 11us | opens 71
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.9% floor   51 slow | LOUDEST   510/2099 [TOO QUIET] gain 4.1 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 71
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.9% floor   49 slow | LOUDEST   639/2099 [TOO QUIET] gain 3.3 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 11us | opens 71
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.9% floor   47 slow | LOUDEST   361/2099 [TOO QUIET] gain 5.8 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 12us | opens 71
+[live] score 0.008 (best 0.008) trig@0.70 | gate 15.9% floor   46 slow | LOUDEST   625/2099 [TOO QUIET] gain 3.4 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 14us | opens 71
+[live] score 0.008 (best 0.008) trig@0.70 | gate 15.9% floor   47 slow | LOUDEST   465/2099 [TOO QUIET] gain 4.5 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 14us | opens 71
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.9% floor   45 slow | LOUDEST   556/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.8 | CPU 9% = 5 front + 4 net | hits 20 | link UP 16us | opens 71
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.9% floor   47 slow | LOUDEST   380/2099 [TOO QUIET] gain 5.5 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 22us | opens 71
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.9% floor   47 slow | LOUDEST   582/2099 [TOO QUIET] gain 3.6 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 71
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.9% floor   48 slow | LOUDEST   435/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 72
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.9% floor   49 slow | LOUDEST   472/2099 [TOO QUIET] gain 4.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 72
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.9% floor   48 slow | LOUDEST   745/2099 [TOO QUIET] gain 2.8 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 72
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.8% floor   48 slow | LOUDEST   528/2099 [TOO QUIET] gain 4.0 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 72
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.020) trig@0.70 | gate 15.8% floor   48 slow | LOUDEST   774/2099 [TOO QUIET] gain 2.7 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 72
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.8% floor   49 slow | LOUDEST   482/2099 [TOO QUIET] gain 4.4 | front 0.49 infer 27.9 | CPU 9% = 5 front + 4 net | hits 20 | link UP 11us | opens 72
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.8% floor   49 slow | LOUDEST   453/2099 [TOO QUIET] gain 4.6 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 12us | opens 72
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.8% floor   49 slow | LOUDEST   437/2099 [TOO QUIET] gain 4.8 | front 0.50 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 12us | opens 72
+[live] score 0.012 (best 0.016) trig@0.70 | gate 15.8% floor   48 slow | LOUDEST   649/2099 [TOO QUIET] gain 3.2 | front 0.58 infer 27.6 | CPU 9% = 6 front + 4 net | hits 20 | link UP 15us | opens 72
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.8% floor   50 slow | LOUDEST   455/2099 [TOO QUIET] gain 4.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 18us | opens 72
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.8% floor   51 slow | LOUDEST   385/2099 [TOO QUIET] gain 5.5 | front 0.50 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 20us | opens 72
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.7% floor   50 slow | LOUDEST   427/2099 [TOO QUIET] gain 4.9 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 22us | opens 72
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.7% floor   50 slow | LOUDEST   425/2099 [TOO QUIET] gain 4.9 | front 0.50 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 72
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.7% floor   51 slow | LOUDEST   460/2099 [TOO QUIET] gain 4.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 72
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.7% floor   51 slow | LOUDEST   472/2099 [TOO QUIET] gain 4.4 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 72
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.7% floor   50 slow | LOUDEST   499/2099 [TOO QUIET] gain 4.2 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 72
+[live] score 0.012 (best 0.016) trig@0.70 | gate 15.7% floor   50 slow | LOUDEST   410/2099 [TOO QUIET] gain 5.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 72
+[live] score 0.012 (best 0.016) trig@0.70 | gate 15.7% floor   51 slow | LOUDEST   413/2099 [TOO QUIET] gain 5.1 | front 0.49 infer 27.8 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 72
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.7% floor   50 slow | LOUDEST   512/2099 [TOO QUIET] gain 4.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 72
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.7% floor   50 slow | LOUDEST   420/2099 [TOO QUIET] gain 5.0 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 72
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.7% floor   52 slow | LOUDEST   549/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 72
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.6% floor   51 slow | LOUDEST   518/2099 [TOO QUIET] gain 4.1 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 72
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.6% floor   51 slow | LOUDEST   698/2099 [TOO QUIET] gain 3.0 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 72
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.6% floor   51 slow | LOUDEST   457/2099 [TOO QUIET] gain 4.6 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 72
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.6% floor   50 slow | LOUDEST   429/2099 [TOO QUIET] gain 4.9 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 72
+[live] score 0.012 (best 0.020) trig@0.70 | gate 15.6% floor   52 slow | LOUDEST   515/2099 [TOO QUIET] gain 4.1 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 72
+[live] score 0.016 (best 0.016) trig@0.70 | gate 15.6% floor   56 slow | LOUDEST   528/2099 [TOO QUIET] gain 4.0 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 72
+[live] score 0.008 (best 0.023) trig@0.70 | gate 15.6% floor   57 slow | LOUDEST   657/2099 [TOO QUIET] gain 3.2 | front 0.49 infer 27.8 | CPU 9% = 5 front + 4 net | hits 20 | link UP 11us | opens 72
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.6% floor   49 slow | LOUDEST   434/2099 [TOO QUIET] gain 4.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 72
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.6% floor   50 slow | LOUDEST   440/2099 [TOO QUIET] gain 4.8 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 11us | opens 72
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.5% floor   51 slow | LOUDEST   493/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 11us | opens 72
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.5% floor   51 slow | LOUDEST   668/2099 [TOO QUIET] gain 3.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 12us | opens 72
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.5% floor   51 slow | LOUDEST   488/2099 [TOO QUIET] gain 4.3 | front 0.50 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 14us | opens 72
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.5% floor   51 slow | LOUDEST   593/2099 [TOO QUIET] gain 3.5 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 14us | opens 72
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.078 (best 0.109) trig@0.70 | gate 15.5% floor   55 FAST | LOUDEST   553/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 14us | opens 73
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.5% floor   50 slow | LOUDEST   616/2099 [TOO QUIET] gain 3.4 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 12us | opens 73
+[live] score 0.016 (best 0.016) trig@0.70 | gate 15.5% floor   55 slow | LOUDEST   551/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.016 (best 0.016) trig@0.70 | gate 15.5% floor   51 slow | LOUDEST   505/2099 [TOO QUIET] gain 4.2 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 73
+[live] score 0.012 (best 0.016) trig@0.70 | gate 15.5% floor   52 slow | LOUDEST   625/2099 [TOO QUIET] gain 3.4 | front 0.50 infer 27.8 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.5% floor   51 slow | LOUDEST   651/2099 [TOO QUIET] gain 3.2 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.5% floor   52 slow | LOUDEST   505/2099 [TOO QUIET] gain 4.2 | front 0.49 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.5% floor   52 slow | LOUDEST   628/2099 [TOO QUIET] gain 3.3 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.012 (best 0.016) trig@0.70 | gate 15.5% floor   52 slow | LOUDEST   508/2099 [TOO QUIET] gain 4.1 | front 0.49 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.5% floor   52 slow | LOUDEST   487/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 20 | link UP 11us | opens 73
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.4% floor   52 slow | LOUDEST   667/2099 [TOO QUIET] gain 3.1 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 20 | link UP 13us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.4% floor   51 slow | LOUDEST   505/2099 [TOO QUIET] gain 4.2 | front 0.50 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 14us | opens 73
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.4% floor   52 slow | LOUDEST   527/2099 [TOO QUIET] gain 4.0 | front 0.49 infer 27.7 | CPU 8% = 5 front + 4 net | hits 20 | link UP 17us | opens 73
+[live] score 0.012 (best 0.016) trig@0.70 | gate 15.4% floor   52 slow | LOUDEST   545/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 20 | link UP 19us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.4% floor   52 slow | LOUDEST   637/2099 [TOO QUIET] gain 3.3 | front 0.50 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 23us | opens 73
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.4% floor   52 slow | LOUDEST   557/2099 [TOO QUIET] gain 3.8 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.4% floor   52 slow | LOUDEST   506/2099 [TOO QUIET] gain 4.1 | front 0.49 infer 27.8 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.4% floor   52 slow | LOUDEST   434/2099 [TOO QUIET] gain 4.8 | front 0.50 infer 27.6 | CPU 9% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.4% floor   52 slow | LOUDEST   420/2099 [TOO QUIET] gain 5.0 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.4% floor   53 slow | LOUDEST   414/2099 [TOO QUIET] gain 5.1 | front 0.50 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 9us | opens 73
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.008) trig@0.70 | gate 15.4% floor   59 slow | LOUDEST   447/2099 [TOO QUIET] gain 4.7 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 20 | link UP 9us | opens 73
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.3% floor   58 slow | LOUDEST   909/2099 [ok] gain 2.3 | front 0.50 infer 27.7 | CPU 9% = 5 front + 4 net | hits 20 | link UP 11us | opens 73
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.3% floor   57 slow | LOUDEST   385/2099 [TOO QUIET] gain 5.5 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 20 | link UP 9us | opens 73
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.3% floor   58 slow | LOUDEST   667/2099 [TOO QUIET] gain 3.1 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.3% floor   58 slow | LOUDEST   360/2099 [TOO QUIET] gain 5.8 | front 0.49 infer 27.7 | CPU 8% = 5 front + 4 net | hits 20 | link UP 9us | opens 73
+[live] score 0.012 (best 0.016) trig@0.70 | gate 15.3% floor   60 slow | LOUDEST   667/2099 [TOO QUIET] gain 3.1 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.004 (best 0.016) trig@0.70 | gate 15.3% floor   61 slow | LOUDEST   881/2099 [ok] gain 2.4 | front 0.50 infer 27.7 | CPU 8% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.3% floor   53 slow | LOUDEST   495/2099 [TOO QUIET] gain 4.2 | front 0.49 infer 27.7 | CPU 8% = 5 front + 4 net | hits 20 | link UP 11us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.3% floor   57 slow | LOUDEST   522/2099 [TOO QUIET] gain 4.0 | front 0.49 infer 27.7 | CPU 8% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.008) trig@0.70 | gate 15.3% floor   60 slow | LOUDEST   403/2099 [TOO QUIET] gain 5.2 | front 0.49 infer 27.7 | CPU 8% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.008 (best 0.008) trig@0.70 | gate 15.3% floor   61 slow | LOUDEST   387/2099 [TOO QUIET] gain 5.4 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.3% floor   57 slow | LOUDEST   499/2099 [TOO QUIET] gain 4.2 | front 0.49 infer 27.7 | CPU 8% = 5 front + 4 net | hits 20 | link UP 9us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.3% floor   55 slow | LOUDEST   504/2099 [TOO QUIET] gain 4.2 | front 0.49 infer 27.7 | CPU 8% = 5 front + 4 net | hits 20 | link UP 11us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.2% floor   56 slow | LOUDEST   395/2099 [TOO QUIET] gain 5.3 | front 0.50 infer 27.6 | CPU 8% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.2% floor   57 slow | LOUDEST   469/2099 [TOO QUIET] gain 4.5 | front 0.49 infer 27.7 | CPU 8% = 5 front + 4 net | hits 20 | link UP 12us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.2% floor   57 slow | LOUDEST   596/2099 [TOO QUIET] gain 3.5 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 20 | link UP 12us | opens 73
+[live] score 0.016 (best 0.016) trig@0.70 | gate 15.2% floor   61 slow | LOUDEST   553/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.7 | CPU 8% = 5 front + 4 net | hits 20 | link UP 15us | opens 73
+[live] score 0.004 (best 0.012) trig@0.70 | gate 15.2% floor   56 slow | LOUDEST   388/2099 [TOO QUIET] gain 5.4 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 20 | link UP 18us | opens 73
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.2% floor   58 slow | LOUDEST   559/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.6 | CPU 8% = 5 front + 4 net | hits 20 | link UP 22us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.2% floor   58 slow | LOUDEST   479/2099 [TOO QUIET] gain 4.4 | front 0.49 infer 28.0 | CPU 8% = 5 front + 4 net | hits 20 | link UP 9us | opens 73
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------
+[live] score 0.004 (best 0.008) trig@0.70 | gate 15.2% floor   59 slow | LOUDEST   559/2099 [TOO QUIET] gain 3.8 | front 0.49 infer 27.7 | CPU 8% = 5 front + 4 net | hits 20 | link UP 9us | opens 73
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.2% floor   57 slow | LOUDEST   685/2099 [TOO QUIET] gain 3.1 | front 0.49 infer 27.7 | CPU 8% = 5 front + 4 net | hits 20 | link UP 9us | opens 73
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.2% floor   56 slow | LOUDEST   898/2099 [ok] gain 2.3 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.016) trig@0.70 | gate 15.2% floor   54 slow | LOUDEST   439/2099 [TOO QUIET] gain 4.8 | front 0.51 infer 27.6 | CPU 9% = 5 front + 3 net | hits 20 | link UP 11us | opens 73
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.2% floor   53 slow | LOUDEST   638/2099 [TOO QUIET] gain 3.3 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 20 | link UP 9us | opens 73
+[live] score 0.012 (best 0.012) trig@0.70 | gate 15.2% floor   52 slow | LOUDEST   592/2099 [TOO QUIET] gain 3.5 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 20 | link UP 9us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.1% floor   53 slow | LOUDEST   491/2099 [TOO QUIET] gain 4.3 | front 0.49 infer 27.8 | CPU 8% = 5 front + 4 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.1% floor   52 slow | LOUDEST   524/2099 [TOO QUIET] gain 4.0 | front 0.49 infer 27.6 | CPU 8% = 5 front + 3 net | hits 20 | link UP 10us | opens 73
+[live] score 0.008 (best 0.008) trig@0.70 | gate 15.1% floor   52 slow | LOUDEST   451/2099 [TOO QUIET] gain 4.7 | front 0.50 infer 27.6 | CPU 8% = 5 front + 3 net | hits 20 | link UP 11us | opens 73
+[live] score 0.008 (best 0.012) trig@0.70 | gate 15.1% floor   52 slow | LOUDEST   881/2099 [ok] gain 2.4 | front 0.49 infer 27.7 | CPU 8% = 5 front + 3 net | hits 20 | link UP 10us | opens 73
+--- RAM, against the 256 KB ceiling ---------------------------
+  static DRAM (.data+.bss)    63480 B    62.0 KB   [from firmware.elf]
+  heap PEAK ever used        131132 B   128.1 KB   [total 331532 - min-free 200400]
+  TOTAL INTERNAL SRAM        194612 B   190.1 KB   = 74.2% of 256 KB
+  headroom left               67532 B    65.9 KB
+  of which: arena 35996 B, model 21208 B flash, pre-roll 12200 B
+--------------------------------------------------------------

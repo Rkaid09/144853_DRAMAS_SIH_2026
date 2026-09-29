@@ -1,0 +1,19 @@
+# recording and benchmarking
+sounddevice
+numpy
+
+# corpus download and voice generation
+requests
+huggingface_hub<1.0
+edge-tts
+indic_transliteration
+pydub
+aiohttp
+scipy
+soundfile
+pyarrow
+
+# IndicF5 (GPU; separate environment recommended)
+# torch
+# transformers==4.49.0
+# librosa
